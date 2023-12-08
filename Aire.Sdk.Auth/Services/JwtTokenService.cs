@@ -30,7 +30,7 @@ namespace Aire.Sdk.Auth.Services
         }
 
 
-        public bool CheckAuthorization(JwtAuthFeature auth, string? allowedRoles = null, string? requiredScopes = null)
+        public bool CheckAuthorization(JwtAuthFeature? auth, string? allowedRoles = null, string? requiredScopes = null)
         {
             var allowed = allowedRoles?.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
             var required = requiredScopes?.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
@@ -41,7 +41,7 @@ namespace Aire.Sdk.Auth.Services
             return CheckAuthorization(auth, roles, scopes);
         }
 
-        public bool CheckAuthorization(JwtAuthFeature auth, AireRoles? allowedRoles, AireScopes? requiredScopes)
+        public bool CheckAuthorization(JwtAuthFeature? auth, AireRoles? allowedRoles, AireScopes? requiredScopes)
         {
             if(auth == null) return false;
 
