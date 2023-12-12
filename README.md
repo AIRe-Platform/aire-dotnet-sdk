@@ -4,13 +4,21 @@ Common libraries for building AIRe platform modules.
 
 ## Overview
 
-The SDK targets .NET Standard 2.1 and has the following libraries:
+The SDK targets .NET 8 and has the following libraries:
 
 ### Aire.Sdk.Auth
 
 Contains utilities, models, and constants related to AIRe platform's authentication mechanism.
 
 These include custom Json Web Token (JWT) Middleware as well as scopes and claims used in AIRe platform.
+
+### Aire.Sdk.AspNetCore
+
+Utilities and extensions for ASP.NET Core.
+
+### Aire.Sdk.Helpers
+
+Miscellaneous helpers.
 
 ## Disclaimer
 

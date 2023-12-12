@@ -1,0 +1,24 @@
+using Newtonsoft.Json;
+
+namespace Aire.Sdk.Helpers
+{
+    public static class JsonExtensions
+    {
+        public static JsonSerializerSettings Settings { get; set; } = new()
+        {
+			Error = delegate (object? sender, Newtonsoft.Json.Serialization.ErrorEventArgs args) {
+				args.ErrorContext.Handled = true;
+			}
+		};
+
+        public static T? JsonToObject<T>(this string jsonString)
+        {
+            return JsonConvert.DeserializeObject<T>(jsonString, Settings);
+        }
+
+        public static string ObjectToJson<T>(this T obj)
+        {
+            return JsonConvert.SerializeObject(obj, Settings);
+        }
+    }
+}
