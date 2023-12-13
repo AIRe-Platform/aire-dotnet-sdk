@@ -9,10 +9,16 @@ namespace Aire.Sdk.Auth.Models
         public ClaimsPrincipal Principal { get; set; }
         public JwtSecurityToken Token { get; set; }
 
-        public JwtAuthFeature(ClaimsPrincipal principal, JwtSecurityToken token)
+        public Guid User { get; set; }
+
+        public string UserKey { get; set; }
+
+        public JwtAuthFeature(ClaimsPrincipal principal, JwtSecurityToken token, Guid user, string userKey)
         {
             Principal = principal;
             Token = token;
+            User = user;
+            UserKey = userKey;
         }
     }
 }

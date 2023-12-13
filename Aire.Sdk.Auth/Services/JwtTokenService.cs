@@ -5,7 +5,6 @@ using Aire.Sdk.Auth.Models;
 using Aire.Sdk.Auth.Roles;
 using Aire.Sdk.Auth.Scopes;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Aire.Sdk.Auth.Services
@@ -19,13 +18,14 @@ namespace Aire.Sdk.Auth.Services
         private readonly JwtTokenServiceConfiguration _config;
 
         public JwtTokenService(
-            JwtSecurityTokenHandler handler, TokenValidationParameters validationParams,
-            IOptions<JwtTokenServiceConfiguration> options,
+            JwtSecurityTokenHandler handler, 
+            TokenValidationParameters validationParams,
+            JwtTokenServiceConfiguration config,
             ILogger<JwtTokenService> log)
         {
             _handler = handler;
             _validationParams = validationParams;
-            _config = options.Value;
+            _config = config;
             _log = log;
         }
 

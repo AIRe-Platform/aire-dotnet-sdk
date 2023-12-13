@@ -1,5 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
 using System.Security.Claims;
+using System.Text;
+using Aire.Sdk.Auth.Claims;
 using Aire.Sdk.Auth.Models;
 using Aire.Sdk.Auth.Services;
 using Microsoft.AspNetCore.Http;
@@ -14,28 +17,51 @@ namespace Aire.Sdk.Auth.Extensions
 {
     public static class JwtAuthExtension
     {
-        public static IFunctionsWorkerApplicationBuilder UseJwtAuth(this IFunctionsWorkerApplicationBuilder builder)
+        public static IFunctionsWorkerApplicationBuilder UseJwtAuth(
+            this IFunctionsWorkerApplicationBuilder builder, 
+            JwtTokenServiceConfiguration config)
         {   
+            var signingKeyBytes = Encoding.ASCII.GetBytes(config.SigningKey!);
+            var decryptionKeyBytes = Encoding.ASCII.GetBytes(config.EncryptionKey!);
+
+            var validationParams = new TokenValidationParameters {
+                RequireSignedTokens = true,
+                RequireAudience = true,
+                RequireExpirationTime = true,
+
+                ValidAudience = config.Audience,
+                ValidIssuer = config.Issuer,
+                IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes),
+                TokenDecryptionKey = new SymmetricSecurityKey(decryptionKeyBytes),
+
+                ValidateAudience = true,
+                ValidateIssuer = true,
+                ValidateIssuerSigningKey = true,
+                ValidateLifetime = true
+            };
+
             builder.Services
                 .AddSingleton<JwtSecurityTokenHandler>()
-                .AddSingleton<IJwtTokenService, JwtTokenService>();
+                .AddSingleton<IJwtTokenService, JwtTokenService>()
+                .AddSingleton(config)
+                .AddSingleton(validationParams);
 
-            builder.UseMiddleware<JwtAuthMiddleware>(); 
+            builder.UseMiddleware<JwtAuthMiddleware>();
 
             return builder;
         }
     }
 
-        public class JwtAuthMiddleware : IFunctionsWorkerMiddleware
+    public class JwtAuthMiddleware : IFunctionsWorkerMiddleware
     {
         private readonly JwtSecurityTokenHandler _handler;
         private readonly TokenValidationParameters _validationParams;
         private readonly ILogger<JwtAuthMiddleware> _log;
 
-        public JwtAuthMiddleware(JwtSecurityTokenHandler handler, TokenValidationParameters validationParams, ILogger<JwtAuthMiddleware> log)
+        public JwtAuthMiddleware(JwtSecurityTokenHandler handler, TokenValidationParameters validationParameters, ILogger<JwtAuthMiddleware> log)
         {
             _handler = handler;
-            _validationParams = validationParams;
+            _validationParams = validationParameters;
             _log = log;
         }
 
@@ -50,7 +76,14 @@ namespace Aire.Sdk.Auth.Extensions
                     ClaimsPrincipal principal = _handler.ValidateToken(tokenString, _validationParams, out var jwt);
                     var token = (JwtSecurityToken) jwt;
 
-                    context.Features.Set(new JwtAuthFeature(principal, token));
+                    if(!Guid.TryParse(token.Subject, out Guid user))
+                        throw new InvalidCredentialException("Invalid subject format");
+
+                    var key = token.Claims.FirstOrDefault(x => x.Type == AireClaims.UserEncryptionKey)?.Value;
+                    if(!string.IsNullOrWhiteSpace(key))
+                        throw new InvalidCredentialException("Missing or invalid claim: " + AireClaims.UserEncryptionKey);
+
+                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!));
                 }
                 catch(Exception ex)
                 {
