@@ -83,6 +83,7 @@ namespace Aire.Sdk.Auth.Services
                     new(ClaimTypes.Role, role)
                 }),
                 Expires = DateTime.UtcNow + lifetime,
+                IssuedAt = DateTime.UtcNow,
                 Issuer = _config.Issuer,
                 Audience = _config.Audience,
                 Claims = claims
