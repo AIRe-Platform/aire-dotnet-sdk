@@ -80,7 +80,7 @@ namespace Aire.Sdk.Auth.Extensions
                         throw new InvalidCredentialException("Invalid subject format");
 
                     var key = token.Claims.FirstOrDefault(x => x.Type == AireClaims.UserEncryptionKey)?.Value;
-                    if(!string.IsNullOrWhiteSpace(key))
+                    if(string.IsNullOrWhiteSpace(key))
                         throw new InvalidCredentialException("Missing or invalid claim: " + AireClaims.UserEncryptionKey);
 
                     context.Features.Set(new JwtAuthFeature(principal, token, user, key!));
