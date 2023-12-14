@@ -26,19 +26,31 @@ namespace Aire.Sdk.Auth.Extensions
 
             var validationParams = new TokenValidationParameters {
                 RequireSignedTokens = true,
-                RequireAudience = true,
                 RequireExpirationTime = true,
-
-                ValidAudience = config.Audience,
-                ValidIssuer = config.Issuer,
                 IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes),
                 TokenDecryptionKey = new SymmetricSecurityKey(decryptionKeyBytes),
-
-                ValidateAudience = true,
-                ValidateIssuer = true,
                 ValidateIssuerSigningKey = true,
-                ValidateLifetime = true
+                ValidateLifetime = true,
+                ValidateAudience = false,
+                ValidateIssuer = false
             };
+
+            if(!string.IsNullOrEmpty(config.Issuer))
+            {
+                validationParams.ValidateIssuer = true;
+                validationParams.ValidIssuers = config.Issuer.Split(
+                    ",", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+                );
+            }
+
+            if(!string.IsNullOrEmpty(config.Audience))
+            {
+                validationParams.RequireAudience = true;
+                validationParams.ValidateAudience = true;
+                validationParams.ValidAudiences = config.Audience.Split(
+                    ",", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+                );
+            }
 
             builder.Services
                 .AddSingleton<JwtSecurityTokenHandler>()
