@@ -1,4 +1,4 @@
-namespace Aire.Sdk.TableStorage
+namespace Aire.Sdk.Azure
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 	public class EntityTableAttribute : Attribute

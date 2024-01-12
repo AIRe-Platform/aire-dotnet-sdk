@@ -16,6 +16,10 @@ These include custom Json Web Token (JWT) Middleware as well as scopes and claim
 
 Utilities and extensions for ASP.NET Core.
 
+### Aire.Sdk.Azure
+
+Utilities and extensions for Azure resources.
+
 ### Aire.Sdk.Helpers
 
 Miscellaneous helpers.

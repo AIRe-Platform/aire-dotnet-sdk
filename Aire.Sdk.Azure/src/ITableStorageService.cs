@@ -2,7 +2,7 @@
 using Azure;
 using Azure.Data.Tables;
 
-namespace Aire.Sdk.TableStorage
+namespace Aire.Sdk.Azure
 {
     public interface ITableStorageService 
     {

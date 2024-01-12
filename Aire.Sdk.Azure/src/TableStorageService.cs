@@ -4,7 +4,7 @@ using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Options;
 
-namespace Aire.Sdk.TableStorage
+namespace Aire.Sdk.Azure
 {
     public class TableStorageService : ITableStorageService
     {

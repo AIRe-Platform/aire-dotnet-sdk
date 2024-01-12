@@ -12,6 +12,9 @@ namespace Aire.Sdk.Auth.Scopes
         public const string DeleteChatHistory = "chat-history-delete";
         public static readonly AireScopes ChatHistory = [ ReadChatHistory, WriteChatHistory, DeleteChatHistory ];
 
+        public const string UnverifiedAccount = "unverified-account";
+        public const string EulaRequired = "eula-required";
+
         public static readonly AireScopes UserScopes = new AireScopes(Profile, ChatHistory);
         public static readonly AireScopes All = new AireScopes(Profile, ChatHistory);
 

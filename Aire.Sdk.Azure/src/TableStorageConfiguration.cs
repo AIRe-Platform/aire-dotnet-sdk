@@ -1,4 +1,4 @@
-namespace Aire.Sdk.TableStorage
+namespace Aire.Sdk.Azure
 {
     public class TableStorageConfiguration
     {
