@@ -12,6 +12,11 @@ namespace Aire.Sdk.Auth.Scopes
         public const string DeleteChatHistory = "chat-history-delete";
         public static readonly AireScopes ChatHistory = [ ReadChatHistory, WriteChatHistory, DeleteChatHistory ];
 
+        public const string ReadQuestionnaire = "questionnaire-read";
+        public const string WriteQuestionnaire = "questionnaire-write";
+        public const string DeleteQuestionnaire = "questionnaire-delete";
+        public static readonly AireScopes Questionnaire = [ ReadQuestionnaire, WriteQuestionnaire, DeleteQuestionnaire ];
+
         public const string ChatCompletion = "chat-completion";
         public const string ChatSummary = "chat-summary";
         public const string ChatEmbeddings = "chat-embeddings";
@@ -22,8 +27,8 @@ namespace Aire.Sdk.Auth.Scopes
         public const string UnverifiedAccount = "unverified-account";
         public const string EulaRequired = "eula-required";
 
-        public static readonly AireScopes UserScopes = new AireScopes(Profile, ChatHistory, ChatBot);
-        public static readonly AireScopes All = new AireScopes(Profile, ChatHistory, ChatBot, ChatBotAdmin);
+        public static readonly AireScopes UserScopes = new AireScopes(Profile, ChatHistory, ChatBot, Questionnaire);
+        public static readonly AireScopes All = new AireScopes(Profile, ChatHistory, ChatBot, ChatBotAdmin, Questionnaire);
 
         public AireScopes() : base() {}
         public AireScopes(params string[] scopes) : base(scopes) {}
