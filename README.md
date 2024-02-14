@@ -24,6 +24,10 @@ Utilities and extensions for Azure resources.
 
 Miscellaneous helpers.
 
+### Aire.Sdk.Models
+
+Common data models.
+
 ## Disclaimer
 
 This repository is a work-in-progress. Expect that documentation is missing, out-dated, or incorrect.

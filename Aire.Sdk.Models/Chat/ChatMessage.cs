@@ -1,0 +1,29 @@
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Newtonsoft.Json;
+using Aire.Sdk.Models.Resources;
+
+namespace Aire.Sdk.Models.Chat
+{
+    public class ChatMessage
+    {
+        [JsonProperty("role", Required = Required.Always)]
+        [OpenApiProperty(Description = "The role of the message's author")]
+        public ChatRole? Role { get; set; }
+
+        [JsonProperty("timestamp")]
+        [OpenApiProperty(Description = "The message timestamp in Unix time")]
+        public long Timestamp { get; set; }
+
+        [JsonProperty("content")]
+        [OpenApiProperty(Description = "Message content")]
+        public string? Content { get; set; }
+
+        [JsonProperty("rating")]
+        [OpenApiProperty(Description = "Message rating")]
+        public int? Rating { get; set; }
+
+        [JsonProperty("questionnaire_answer")]
+        [OpenApiProperty(Description = "Questionnaire answer")]
+        public QuestionnaireAnswer? Answer { get; set; }
+    }
+}
