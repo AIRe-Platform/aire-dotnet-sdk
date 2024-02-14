@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Aire.Sdk.Auth.Models;
-using Aire.Sdk.Auth.Roles;
 using Aire.Sdk.Auth.Scopes;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -30,30 +29,16 @@ namespace Aire.Sdk.Auth.Services
         }
 
 
-        public bool CheckAuthorization(JwtAuthFeature? auth, string? allowedRoles = null, string? requiredScopes = null)
+        public bool CheckAuthorization(JwtAuthFeature? auth, string? requiredScopes = null)
         {
-            var allowed = allowedRoles?.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
             var required = requiredScopes?.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
-            AireRoles? roles = (allowed == null) ? null : new AireRoles(allowed);
             AireScopes? scopes = (required == null) ? null : new AireScopes(required);
-
-            return CheckAuthorization(auth, roles, scopes);
+            return CheckAuthorization(auth, scopes);
         }
 
-        public bool CheckAuthorization(JwtAuthFeature? auth, AireRoles? allowedRoles, AireScopes? requiredScopes)
+        public bool CheckAuthorization(JwtAuthFeature? auth, AireScopes? requiredScopes)
         {
             if(auth == null) return false;
-
-            if(allowedRoles != null)
-            {
-                var matchingRole = allowedRoles.FirstOrDefault(x => auth.Principal.IsInRole(x));
-                if(matchingRole == null)
-                {
-                    _log.LogWarning($"User does not have appropriate role to access this resource");
-                    return false;
-                }
-            }
 
             if(requiredScopes != null)
             {
