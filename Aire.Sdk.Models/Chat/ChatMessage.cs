@@ -24,6 +24,6 @@ namespace Aire.Sdk.Models.Chat
 
         [JsonProperty("questionnaire_answer")]
         [OpenApiProperty(Description = "Questionnaire answer")]
-        public QuestionnaireAnswer? Answer { get; set; }
+        public QuestionnaireAnswer? QuestionnaireAnswer { get; set; }
     }
 }
