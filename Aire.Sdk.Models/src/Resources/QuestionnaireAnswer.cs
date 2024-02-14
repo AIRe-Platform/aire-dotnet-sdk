@@ -20,5 +20,5 @@ public class QuestionnaireAnswer
     public dynamic? Answer { get; set; }
 
     [JsonProperty("options")]
-    public QuestionOption? Options { get; set; }
+    public object? Options { get; set; }
 }
