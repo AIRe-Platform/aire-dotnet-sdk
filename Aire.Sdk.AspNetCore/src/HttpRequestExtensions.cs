@@ -7,7 +7,7 @@ namespace Aire.Sdk.AspNetCore
     {
         public static async Task<T?> ReadJson<T>(this HttpRequest req)
         {
-            if(req.ContentType == "application/json" && req.Body != null)
+            if (req.ContentType == "application/json" && req.Body != null)
             {
                 try
                 {
@@ -15,7 +15,7 @@ namespace Aire.Sdk.AspNetCore
                     string body = await reader.ReadToEndAsync();
                     return body.JsonToObject<T>();
                 }
-                catch(Exception) {}
+                catch (Exception) { }
             }
             return default;
         }
@@ -25,6 +25,16 @@ namespace Aire.Sdk.AspNetCore
             string? value = req.Form[param];
             value ??= req.Query[param];
             return value;
+        }
+
+        public static async Task<T?> ReadJsonResponse<T>(this HttpResponseMessage response) where T : new()
+        {
+            if (response.Content != null)
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                return body.JsonToObject<T>();
+            }
+            return default;
         }
     }
 }
