@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Aire.Sdk.Models.Resources;
 
-public class QuestionnaireAnswer
+public class QuestionnaireItem
 {
     [JsonProperty("question_id", Required = Required.Always)]
     public string? QuestionId { get; set; }

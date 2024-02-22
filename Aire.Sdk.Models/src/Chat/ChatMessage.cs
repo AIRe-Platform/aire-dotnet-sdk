@@ -22,16 +22,8 @@ namespace Aire.Sdk.Models.Chat
         [OpenApiProperty(Description = "Message rating")]
         public int? Rating { get; set; }
 
-        [JsonProperty("questionnaire_answer")]
-        [OpenApiProperty(Description = "Questionnaire answer")]
-        public QuestionnaireAnswer? QuestionnaireAnswer { get; set; }
-    }
-
-    public class ChatLogWrapper
-    {
-        [JsonProperty("messages")]
-        public List<ChatMessage> Messages;
-        [JsonProperty("state")]
-        public ChatState? State;
+        [JsonProperty("question")]
+        [OpenApiProperty(Description = "Questionnaire question and answer")]
+        public QuestionnaireItem? Question { get; set; }
     }
 }
