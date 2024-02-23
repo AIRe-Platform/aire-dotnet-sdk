@@ -24,7 +24,7 @@ namespace Aire.Sdk.Models.Chat
 
         [JsonProperty("question")]
         [OpenApiProperty(Description = "Questionnaire question and answer")]
-        public QuestionnaireItem? Question { get; set; }
+        public QuestionAnswer? Question { get; set; }
 
         [JsonProperty("hidden")]
         [OpenApiProperty(Description = "Hides message from chat")]

@@ -17,7 +17,7 @@ public class QuestionnaireResults
     public Dictionary<string, dynamic>? Preliminary { get; set; }
 
     [JsonProperty("answers", Required = Required.Always)]
-    public List<QuestionnaireItem>? Answers { get; set; }
+    public List<QuestionAnswer>? Answers { get; set; }
 
     [JsonProperty("summary", Required = Required.Always)]
     public string? Summary { get; set; }
