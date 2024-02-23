@@ -9,5 +9,5 @@ public class ChatLog
     public List<ChatMessage>? Messages { get; set; }
 
     [JsonProperty("state")]
-    public ChatState? State { get; set; }
+    public object? State { get; set; }
 }
