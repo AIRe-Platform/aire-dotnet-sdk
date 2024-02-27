@@ -19,21 +19,9 @@ namespace Aire.Sdk.Models.Resources
         [JsonProperty("keywords", Required = Required.Always)]
         public string[]? Keywords { get; set; }
 
-        [JsonProperty("preliminary")]
-        public Preliminary? Preliminary { get; set; }
-
         [JsonProperty("content", Required = Required.Always)]
         public List<QuestionnaireContent>? Content { get; set; }
 
         public Questionnaire() { }
-    }
-
-    public class Preliminary
-    {
-        [JsonProperty("properties")]
-        public Dictionary<string, dynamic>? Properties { get; set; }
-
-        [JsonProperty("required")]
-        public List<string>? Required { get; set; }
     }
 }
