@@ -12,13 +12,15 @@ namespace Aire.Sdk.Auth.Models
         public Guid User { get; set; }
 
         public string UserKey { get; set; }
+        public string JwtEncodedToken { get; set; }
 
-        public JwtAuthFeature(ClaimsPrincipal principal, JwtSecurityToken token, Guid user, string userKey)
+        public JwtAuthFeature(ClaimsPrincipal principal, JwtSecurityToken token, Guid user, string userKey, string jwt)
         {
             Principal = principal;
             Token = token;
             User = user;
             UserKey = userKey;
+            JwtEncodedToken = jwt;
         }
     }
 }

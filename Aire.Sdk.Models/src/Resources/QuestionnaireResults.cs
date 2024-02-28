@@ -13,11 +13,8 @@ public class QuestionnaireResults
     [JsonProperty("timestamp")]
     public DateTime? Timestamp { get; set; }
 
-    [JsonProperty("preliminary")]
-    public Dictionary<string, dynamic>? Preliminary { get; set; }
-
     [JsonProperty("answers", Required = Required.Always)]
-    public List<QuestionnaireAnswer>? Answers { get; set; }
+    public List<QuestionAnswer>? Answers { get; set; }
 
     [JsonProperty("summary", Required = Required.Always)]
     public string? Summary { get; set; }

@@ -95,7 +95,7 @@ namespace Aire.Sdk.Auth.Extensions
                     if(string.IsNullOrWhiteSpace(key))
                         throw new InvalidCredentialException("Missing or invalid claim: " + AireClaims.UserEncryptionKey);
 
-                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!));
+                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!, tokenString));
                 }
                 catch(Exception ex)
                 {

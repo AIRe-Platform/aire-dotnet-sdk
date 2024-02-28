@@ -22,8 +22,12 @@ namespace Aire.Sdk.Models.Chat
         [OpenApiProperty(Description = "Message rating")]
         public int? Rating { get; set; }
 
-        [JsonProperty("questionnaire_answer")]
-        [OpenApiProperty(Description = "Questionnaire answer")]
-        public QuestionnaireAnswer? QuestionnaireAnswer { get; set; }
+        [JsonProperty("question")]
+        [OpenApiProperty(Description = "Questionnaire question and answer")]
+        public QuestionAnswer? Question { get; set; }
+
+        [JsonProperty("hidden")]
+        [OpenApiProperty(Description = "Hides message from chat")]
+        public bool Hidden { get; set; } = false;
     }
 }
