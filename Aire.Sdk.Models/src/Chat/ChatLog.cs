@@ -10,4 +10,7 @@ public class ChatLog
 
     [JsonProperty("state")]
     public object? State { get; set; }
+
+    [JsonProperty("stats")]
+    public object? Stats { get; set; }
 }
