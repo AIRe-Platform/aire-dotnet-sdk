@@ -1,4 +1,4 @@
-namespace Aire.Sdk.Auth.Services
+namespace Aire.Sdk.Auth
 {
     public class JwtTokenServiceConfiguration
     {

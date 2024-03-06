@@ -1,6 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Aire.Sdk.Auth.Services
+namespace Aire.Sdk.Auth
 {
     public interface IJwtTokenService
     {

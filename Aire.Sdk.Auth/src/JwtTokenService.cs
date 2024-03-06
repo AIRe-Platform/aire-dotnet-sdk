@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Aire.Sdk.Auth.Services
+namespace Aire.Sdk.Auth
 {
     public class JwtTokenService : IJwtTokenService
     {
