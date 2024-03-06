@@ -5,10 +5,10 @@ namespace Aire.Sdk.Auth
         public const string User = "user";
         public const string Admin = "admin";
 
-        public const string Researcher = "researcher";
-        public const string ResearchSubject = "research-subject";
+        public const string DemoAdmin = "demo-admin";
+        public const string DemoUser = "demo-user";
 
-        public static readonly AireRoles All = [ User, Admin, Researcher, ResearchSubject ];
+        public static readonly AireRoles All = [ User, Admin, DemoAdmin, DemoUser ];
 
         public AireRoles() : base() {}
         public AireRoles(params string[] roles) : base(roles) {}

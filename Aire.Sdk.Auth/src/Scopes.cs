@@ -28,10 +28,10 @@ namespace Aire.Sdk.Auth
         public const string ChatTokenCount = "chat-token-count";
         public static readonly AireScopes ChatBot = [ChatCompletion, ChatSummary, ChatTokenCount];
 
-        public const string ReadResearch = "research-read";
-        public const string WriteResearch = "research-write";
-        public const string DeleteResearch = "research-delete";
-        public static readonly AireScopes ResearchSubjects = [ReadResearch, WriteResearch, DeleteResearch];
+        public const string CreateDemoGroups = "demo-group-read";
+        public const string EditDemoGroups = "demo-group-write";
+        public const string DeleteDemoGroups = "demo-group-delete";
+        public static readonly AireScopes DemoGroups = [CreateDemoGroups, EditDemoGroups, DeleteDemoGroups];
 
         public const string AireHub = "aire-hub";
         public const string UnverifiedAccount = "unverified-account";
@@ -43,7 +43,7 @@ namespace Aire.Sdk.Auth
             ChatBot,
             Questionnaire,
             Document,
-            ResearchSubjects,
+            DemoGroups,
             AireHub
         );
 
@@ -55,13 +55,13 @@ namespace Aire.Sdk.Auth
             ReadDocument
         );
 
-        public static readonly AireScopes ResearcherScopes = new(
+        public static readonly AireScopes DemoAdminScopes = new(
             UserScopes,
-            ResearchSubjects,
+            DemoGroups,
             AireHub
         );
 
-        public static readonly AireScopes ResearchSubjectScopes = new(
+        public static readonly AireScopes DemoUserScopes = new(
             ReadProfile,
             EditProfile,
             ChatBot,
@@ -72,8 +72,8 @@ namespace Aire.Sdk.Auth
         public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
             { AireRoles.User, UserScopes },
             { AireRoles.Admin, AdminScopes },
-            { AireRoles.Researcher, ResearcherScopes },
-            { AireRoles.ResearchSubject, ResearchSubjectScopes}
+            { AireRoles.DemoAdmin, DemoAdminScopes },
+            { AireRoles.DemoUser, DemoUserScopes }
         };
 
         public AireScopes() : base() { }
