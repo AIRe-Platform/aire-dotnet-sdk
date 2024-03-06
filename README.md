@@ -28,6 +28,10 @@ Miscellaneous helpers.
 
 Common data models.
 
+### Aire.Sdk.Platform
+
+Platform service and client libraries.
+
 ## Disclaimer
 
 This repository is a work-in-progress. Expect that documentation is missing, out-dated, or incorrect.

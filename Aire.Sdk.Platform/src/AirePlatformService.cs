@@ -29,7 +29,10 @@ public class AirePlatformService : IAirePlatformService
         _log = log;
 
         if (string.IsNullOrEmpty(_options.ServiceUrl))
+        {
+            _log.LogCritical("ServiceUrl is not configured");
             throw new AirePlatformException("ServiceUrl is not configured");
+        }
 
         _httpClient.BaseAddress = new Uri(_options.ServiceUrl);
 
@@ -37,11 +40,9 @@ public class AirePlatformService : IAirePlatformService
             _httpClient.DefaultRequestHeaders.Add(AirePlaformConstants.AireServiceKeyHeader, _options.ServiceKey);
     }
 
-    public string? ServiceKey { get => _options.ServiceKey; }
-
     public async Task<PlatformConfiguration> GetPlatformConfiguration()
     {
-        if (string.IsNullOrEmpty(ServiceKey))
+        if (string.IsNullOrEmpty(_options.ServiceKey))
             return await GetPublicPlatformConfiguration();
         else
             return await GetInternalPlatformConfiguration();
@@ -50,7 +51,10 @@ public class AirePlatformService : IAirePlatformService
     public async Task<PlatformConfiguration> GetInternalPlatformConfiguration()
     {
         if (string.IsNullOrEmpty(_options.ServiceKey))
+        {
+            _log.LogCritical("ServiceKey is not configured");
             throw new AirePlatformException("ServiceKey is required but missing");
+        }
 
         if (!_cache.TryGetValue(InternalConfigCacheKey, out PlatformConfiguration? config))
         {
@@ -65,7 +69,10 @@ public class AirePlatformService : IAirePlatformService
         }
 
         if (config == null)
+        {
+            _log.LogCritical("Failed to request internal platform configuration");
             throw new AirePlatformException("Unable to determine platform configuration");
+        }
 
         return config;
     }
@@ -78,15 +85,74 @@ public class AirePlatformService : IAirePlatformService
             if (response.IsSuccessStatusCode)
             {
                 config = await response.ReadJsonResponse<PlatformConfiguration>();
-                
+
                 if (config != null)
                     _cache.Set(PublicConfigCacheKey, config, CacheExpiration);
             }
         }
 
         if (config == null)
+        {
+            _log.LogCritical("Failed to request publid platform configuration");
             throw new AirePlatformException("Unable to determine platform configuration");
+        }
 
         return config;
+    }
+
+    public async Task<Module?> GetServiceModule(ModuleType moduleType, string serviceNameOrId)
+    {
+        var platform = await GetPlatformConfiguration();
+
+        var svc = platform.Services?.Where(x => x.Name == serviceNameOrId).FirstOrDefault();
+        if (svc == null)
+        {
+            _log?.LogError($"No service with name '{serviceNameOrId}' found");
+            return null;
+        }
+
+        var module = svc.Modules?.Where(x => x.Type == moduleType).FirstOrDefault();
+        if (module == null)
+        {
+            _log?.LogError($"The service '{serviceNameOrId}' does not have an AI module");
+            return null;
+        }
+
+        return module;
+    }
+
+    public async Task<List<Module>> GetAvailableModulesOfType(ModuleType moduleType)
+    {
+        var modules = new List<Module>();
+        var platform = await GetPlatformConfiguration();
+
+        if(platform.Platform?.Modules != null)
+        {
+            var defaultModules = platform.Platform.Modules
+                .Where(x => x.Value.Type == moduleType)
+                .Select(x => x.Value)
+                .ToList();
+            modules.AddRange(defaultModules);
+        }
+
+        if (platform.Services != null)
+        {
+            var serviceModules = platform.Services
+                .Where(x => x.Modules != null)
+                .Select(x => x.Modules!.Where(y => y.Type == moduleType))
+                .SelectMany(x => x);
+            modules.AddRange(serviceModules);
+        }
+
+        return modules;
+    }
+
+    public async Task<Module?> GetDefaultModuleOfType(ModuleType moduleType)
+    {
+        var platform = await GetPlatformConfiguration();
+        return platform.Platform?.Modules?
+            .Where(x => x.Value.Type == moduleType)
+            .Select(x => x.Value)
+            .FirstOrDefault();
     }
 }

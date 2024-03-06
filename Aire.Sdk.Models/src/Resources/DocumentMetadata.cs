@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Aire.Sdk.AI.Models;
+namespace Aire.Sdk.Models.Resources;
 
 public class DocumentMetadata
 {

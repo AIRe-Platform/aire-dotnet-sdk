@@ -23,7 +23,24 @@ public interface IAirePlatformService
     public abstract Task<PlatformConfiguration> GetInternalPlatformConfiguration();
 
     /// <summary>
-    /// Platform service key if configured
+    /// Try finding a named module of certain type
     /// </summary>
-    public abstract string? ServiceKey { get; }
+    /// <param name="moduleType">Module type</param>
+    /// <param name="serviceNameOrId">Module name or identifier</param>
+    /// <returns>Module object if found, otherwise null</returns>
+    public abstract Task<Module?> GetServiceModule(ModuleType moduleType, string serviceNameOrId);
+
+    /// <summary>
+    /// List available modules of certain type
+    /// </summary>
+    /// <param name="moduleType">Module type</param>
+    /// <returns>List of modules</returns>
+    public abstract Task<List<Module>> GetAvailableModulesOfType(ModuleType moduleType);
+
+    /// <summary>
+    /// Returns platform's default module of certain type.
+    /// </summary>
+    /// <param name="moduleType">Module type</param>
+    /// <returns>Module object if configured, otherwise null</returns>
+    public abstract Task<Module?> GetDefaultModuleOfType(ModuleType moduleType);
 }
