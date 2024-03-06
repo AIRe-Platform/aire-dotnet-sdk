@@ -18,19 +18,19 @@ namespace Aire.Sdk.Azure
         private static string? GetEntityTableName(Type t)
         {
             var attr = t.GetCustomAttribute(typeof(EntityTableAttribute));
-            if(attr == null)
+            if (attr == null)
                 return null;
-            return ((EntityTableAttribute) attr).TableName;
+            return ((EntityTableAttribute)attr).TableName;
         }
 
         private async Task<TableClient> GetTableClientAsync(Type t)
         {
             var tableName = GetEntityTableName(t);
-            
-            if(string.IsNullOrWhiteSpace(tableName))
+
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new ArgumentException(
-                    $"The table entity of type '{t}' is missing attribute '{nameof(EntityTableAttribute)}'!", 
+                    $"The table entity of type '{t}' is missing attribute '{nameof(EntityTableAttribute)}'!",
                     nameof(t));
             }
 
@@ -38,7 +38,7 @@ namespace Aire.Sdk.Azure
             await table.CreateIfNotExistsAsync();
             return table;
         }
-        
+
         public async Task<T?> RetrieveAsync<T>(string key) where T : class, ITableEntity, new()
         {
             return await RetrieveAsync<T>(key, key);
@@ -49,7 +49,7 @@ namespace Aire.Sdk.Azure
             var client = await GetTableClientAsync(typeof(T));
             var response = await client.GetEntityIfExistsAsync<T>(partitionKey, rowKey);
 
-            if(response.HasValue)
+            if (response.HasValue)
                 return response.Value;
 
             return null;
@@ -58,7 +58,7 @@ namespace Aire.Sdk.Azure
         public async Task<bool> UpsertAsync<T>(T entity) where T : class, ITableEntity, new()
         {
             var client = await GetTableClientAsync(typeof(T));
-            var response = await client.UpsertEntityAsync<T>(entity, TableUpdateMode.Replace);
+            var response = await client.UpsertEntityAsync(entity, TableUpdateMode.Merge);
             return !response.IsError;
         }
 
