@@ -9,7 +9,4 @@ public class DemoGroup
 
     [JsonProperty("name")]
     public string? Name { get; set; }
-
-    [JsonProperty("owners")]
-    public List<string>? Owners { get; set; }
 }
