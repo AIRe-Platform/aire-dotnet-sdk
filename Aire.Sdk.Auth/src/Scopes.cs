@@ -28,10 +28,10 @@ namespace Aire.Sdk.Auth
         public const string ChatTokenCount = "chat-token-count";
         public static readonly AireScopes ChatBot = [ChatCompletion, ChatSummary, ChatTokenCount];
 
-        public const string CreateDemoGroups = "demo-group-read";
+        public const string ReadDemoGroups = "demo-group-read";
         public const string EditDemoGroups = "demo-group-write";
         public const string DeleteDemoGroups = "demo-group-delete";
-        public static readonly AireScopes DemoGroups = [CreateDemoGroups, EditDemoGroups, DeleteDemoGroups];
+        public static readonly AireScopes DemoGroups = [ReadDemoGroups, EditDemoGroups, DeleteDemoGroups];
 
         public const string AireHub = "aire-hub";
         public const string UnverifiedAccount = "unverified-account";
