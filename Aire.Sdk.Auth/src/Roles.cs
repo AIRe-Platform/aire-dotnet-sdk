@@ -1,4 +1,4 @@
-namespace Aire.Sdk.Auth.Roles
+namespace Aire.Sdk.Auth
 {
     public class AireRoles : List<string>
     {

@@ -1,13 +1,12 @@
-using Aire.Sdk.Auth.Roles;
-
-namespace Aire.Sdk.Auth.Scopes
+namespace Aire.Sdk.Auth
 {
     public class AireScopes : List<string>
     {
         public const string ReadProfile = "profile-read";
         public const string EditProfile = "profile-edit";
         public const string DeleteProfile = "profile-delete";
-        public static readonly AireScopes Profile = [ReadProfile, EditProfile, DeleteProfile];
+        public const string ConnectProfile = "profile-connect";
+        public static readonly AireScopes Profile = [ReadProfile, EditProfile, DeleteProfile, ConnectProfile];
 
         public const string ReadChatHistory = "chat-history-read";
         public const string WriteChatHistory = "chat-history-write";
@@ -29,10 +28,10 @@ namespace Aire.Sdk.Auth.Scopes
         public const string ChatTokenCount = "chat-token-count";
         public static readonly AireScopes ChatBot = [ChatCompletion, ChatSummary, ChatTokenCount];
 
-        public const string ReadResearchSubject = "research-subject-read";
-        public const string WriteResearchSubject = "research-subject-write";
-        public const string DeleteResearchSubject = "research-subject-delete";
-        public static readonly AireScopes ResearchSubjects = [ReadResearchSubject, WriteResearchSubject, DeleteResearchSubject];
+        public const string ReadResearch = "research-read";
+        public const string WriteResearch = "research-write";
+        public const string DeleteResearch = "research-delete";
+        public static readonly AireScopes ResearchSubjects = [ReadResearch, WriteResearch, DeleteResearch];
 
         public const string AireHub = "aire-hub";
         public const string UnverifiedAccount = "unverified-account";

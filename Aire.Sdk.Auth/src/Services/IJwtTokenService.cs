@@ -1,6 +1,4 @@
 using System.IdentityModel.Tokens.Jwt;
-using Aire.Sdk.Auth.Models;
-using Aire.Sdk.Auth.Scopes;
 
 namespace Aire.Sdk.Auth.Services
 {

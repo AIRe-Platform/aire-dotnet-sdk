@@ -1,4 +1,4 @@
-namespace Aire.Sdk.Auth.Claims
+namespace Aire.Sdk.Auth
 {
     public static class AireClaims
     {

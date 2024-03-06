@@ -2,8 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
-using Aire.Sdk.Auth.Claims;
-using Aire.Sdk.Auth.Models;
 using Aire.Sdk.Auth.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;

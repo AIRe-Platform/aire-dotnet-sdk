@@ -2,7 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Aire.Sdk.Auth.Models
+namespace Aire.Sdk.Auth
 {
     public class JwtAuthFeature
     {
