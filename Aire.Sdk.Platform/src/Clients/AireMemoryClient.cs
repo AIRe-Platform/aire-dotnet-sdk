@@ -1,3 +1,4 @@
+using Aire.Sdk.AspNetCore;
 using Aire.Sdk.Models.Platform;
 using Microsoft.Extensions.Logging;
 
@@ -13,11 +14,17 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
         _log = log;
     }
 
-    public Task<bool> DestroyUserData(bool anonymize)
+    public async Task<bool> DeleteUserData(bool anonymize)
     {
-        _log.LogWarning("Destroying user data is not implemented yet!");
-        return Task.Run(() => {
-            return true;
-        });
+        var query = new Dictionary<string, string?> {
+            { "anonymize", anonymize ? "1" : "0" }
+        };
+
+        string path = "v1/user-data" + QueryString.FromDictionary(query);
+        var req = new HttpRequestMessage(HttpMethod.Delete, path);
+        var response = await _httpClient.SendAsync(req);
+
+        await LogIfErrorResponse(response, _log);
+        return response.IsSuccessStatusCode;
     }
 }
