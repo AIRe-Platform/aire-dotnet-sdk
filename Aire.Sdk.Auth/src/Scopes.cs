@@ -37,6 +37,7 @@ namespace Aire.Sdk.Auth
         public const string UnverifiedAccount = "unverified-account";
         public const string EulaRequired = "eula-required";
         public const string PasswordChange = "password-change";
+        public const string AdminAccounts = "admin-accounts";
 
         public static readonly AireScopes AdminScopes = new(
             Profile,
@@ -46,7 +47,8 @@ namespace Aire.Sdk.Auth
             Document,
             DemoGroups,
             AireHub,
-            PasswordChange
+            PasswordChange,
+            AdminAccounts
         );
 
         public static readonly AireScopes UserScopes = new(
