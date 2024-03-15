@@ -4,7 +4,7 @@ namespace Aire.Sdk.Models.Resources
 {
     public class Questionnaire
     {
-        [JsonProperty("id", Required = Required.Always)]
+        [JsonProperty("id")]
         public Guid? Id { get; set; } = Guid.NewGuid();
 
         [JsonProperty("name", Required = Required.Always)]
