@@ -34,8 +34,6 @@ namespace Aire.Sdk.Auth
         public static readonly AireScopes DemoGroups = [ReadDemoGroups, EditDemoGroups, DeleteDemoGroups];
 
         public const string AireHub = "aire-hub";
-        public const string UnverifiedAccount = "unverified-account";
-        public const string EulaRequired = "eula-required";
         public const string PasswordChange = "password-change";
         public const string AdminAccounts = "admin-accounts";
 

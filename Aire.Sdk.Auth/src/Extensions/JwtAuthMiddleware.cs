@@ -15,13 +15,14 @@ namespace Aire.Sdk.Auth.Extensions
     public static class JwtAuthExtension
     {
         public static IFunctionsWorkerApplicationBuilder UseJwtAuth(
-            this IFunctionsWorkerApplicationBuilder builder, 
+            this IFunctionsWorkerApplicationBuilder builder,
             JwtTokenServiceConfiguration config)
-        {   
+        {
             var signingKeyBytes = Encoding.ASCII.GetBytes(config.SigningKey!);
             var decryptionKeyBytes = Encoding.ASCII.GetBytes(config.EncryptionKey!);
 
-            var validationParams = new TokenValidationParameters {
+            var validationParams = new TokenValidationParameters
+            {
                 RequireSignedTokens = true,
                 RequireExpirationTime = true,
                 IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes),
@@ -32,7 +33,7 @@ namespace Aire.Sdk.Auth.Extensions
                 ValidateIssuer = false
             };
 
-            if(!string.IsNullOrEmpty(config.Issuer))
+            if (!string.IsNullOrEmpty(config.Issuer))
             {
                 validationParams.ValidateIssuer = true;
                 validationParams.ValidIssuers = config.Issuer.Split(
@@ -40,7 +41,7 @@ namespace Aire.Sdk.Auth.Extensions
                 );
             }
 
-            if(!string.IsNullOrEmpty(config.Audience))
+            if (!string.IsNullOrEmpty(config.Audience))
             {
                 validationParams.RequireAudience = true;
                 validationParams.ValidateAudience = true;
@@ -78,23 +79,24 @@ namespace Aire.Sdk.Auth.Extensions
         {
             var httpContext = context.GetHttpContext();
             var tokenString = ParseAuthHeader(httpContext);
-            if(!string.IsNullOrWhiteSpace(tokenString))
+            if (!string.IsNullOrWhiteSpace(tokenString))
             {
                 try
                 {
                     ClaimsPrincipal principal = _handler.ValidateToken(tokenString, _validationParams, out var jwt);
-                    var token = (JwtSecurityToken) jwt;
+                    var token = (JwtSecurityToken)jwt;
 
-                    if(!Guid.TryParse(token.Subject, out Guid user))
+                    if (!Guid.TryParse(token.Subject, out Guid user))
                         throw new InvalidCredentialException("Invalid subject format");
 
                     var key = token.Claims.FirstOrDefault(x => x.Type == AireClaims.UserEncryptionKey)?.Value;
-                    if(string.IsNullOrWhiteSpace(key))
+                    if (string.IsNullOrWhiteSpace(key))
                         throw new InvalidCredentialException("Missing or invalid claim: " + AireClaims.UserEncryptionKey);
 
-                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!, tokenString));
+                    bool verified = token.Claims.FirstOrDefault(x => x.Type == AireClaims.VerifiedAccount)?.Value == "1";
+                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!, tokenString, verified));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _log.LogWarning(ex, "Token validation failed");
                 }
@@ -105,30 +107,30 @@ namespace Aire.Sdk.Auth.Extensions
 
         private string? ParseAuthHeader(HttpContext? http)
         {
-            if(http == null) return null;
-            if(http.Request == null) return null;
+            if (http == null) return null;
+            if (http.Request == null) return null;
 
             IHeaderDictionary headers = http.Request.Headers;
-            if(!headers.TryGetValue("Authorization", out var value))
+            if (!headers.TryGetValue("Authorization", out var value))
             {
                 _log.LogWarning("Missing Authorization header");
                 return null;
             }
 
             var parts = ((string?)value)?.Split(" ");
-            if(parts == null)
+            if (parts == null)
             {
                 _log.LogWarning("Missing Authorization value");
                 return null;
             }
 
-            if(parts[0] != "Bearer")
+            if (parts[0] != "Bearer")
             {
                 _log.LogWarning("Invalid Authorization scheme");
                 return null;
             }
 
-            if(parts.Length != 2)
+            if (parts.Length != 2)
             {
                 _log.LogWarning("Invalid Authorization header format");
                 return null;
