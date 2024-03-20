@@ -2,13 +2,10 @@ using Newtonsoft.Json;
 
 namespace Aire.Sdk.Models.Admin;
 
-public class UserAccount
+public class Account
 {
     [JsonProperty("id", Required = Required.Always)]
     public Guid Id { get; set; }
-
-    [JsonProperty("email")]
-    public string? Email { get; set; }
 
     [JsonProperty("username")]
     public string? Username { get; set; }
