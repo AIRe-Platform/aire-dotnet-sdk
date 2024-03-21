@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Azure;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Aire.Sdk.Azure
@@ -9,10 +10,12 @@ namespace Aire.Sdk.Azure
     public class TableStorageService : ITableStorageService
     {
         private readonly TableServiceClient svcClient;
+        private readonly ILogger<TableStorageService> log;
 
-        public TableStorageService(IOptions<TableStorageConfiguration> options)
+        public TableStorageService(IOptions<TableStorageConfiguration> options, ILogger<TableStorageService> log)
         {
             svcClient = new TableServiceClient(options.Value.ConnectionString);
+            this.log = log;
         }
 
         private static string? GetEntityTableName(Type t)
@@ -29,6 +32,8 @@ namespace Aire.Sdk.Azure
 
             if (string.IsNullOrWhiteSpace(tableName))
             {
+                log.LogCritical("The table entity '{t}' does not have an EntityTable attribute", t);
+
                 throw new ArgumentException(
                     $"The table entity of type '{t}' is missing attribute '{nameof(EntityTableAttribute)}'!",
                     nameof(t));
@@ -37,6 +42,12 @@ namespace Aire.Sdk.Azure
             var table = svcClient.GetTableClient(tableName);
             await table.CreateIfNotExistsAsync();
             return table;
+        }
+
+        public async Task<List<T>> All<T>() where T : class, ITableEntity, new()
+        {
+            var client = await GetTableClientAsync(typeof(T));
+            return await client.QueryAsync<T>().ToListAsync();
         }
 
         public async Task<T?> RetrieveAsync<T>(string key) where T : class, ITableEntity, new()
@@ -59,6 +70,10 @@ namespace Aire.Sdk.Azure
         {
             var client = await GetTableClientAsync(typeof(T));
             var response = await client.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+
+            if (response.IsError)
+                log.LogError("Failed to upsert entity: {status} {reason}", response.Status, response.ReasonPhrase);
+
             return !response.IsError;
         }
 
@@ -71,6 +86,10 @@ namespace Aire.Sdk.Azure
         {
             var client = await GetTableClientAsync(typeof(T));
             var response = await client.DeleteEntityAsync(partitionKey, rowKey);
+
+            if (response.IsError)
+                log.LogError("Failed to delete entity: {status} {reason}", response.Status, response.ReasonPhrase);
+
             return !response.IsError;
         }
 

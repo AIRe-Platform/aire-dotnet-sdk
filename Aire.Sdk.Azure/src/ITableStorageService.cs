@@ -7,6 +7,14 @@ namespace Aire.Sdk.Azure
     public interface ITableStorageService 
     {
         /// <summary>
+        /// Retrieve all entities
+        /// </summary>
+        /// <typeparam name="T">Entity class</typeparam>
+        /// <returns>List of entities</returns>
+        Task<List<T>> All<T>()
+            where T: class, ITableEntity, new();
+
+        /// <summary>
         /// Retrieves an entity using the key as both the partition key and row key
         /// </summary>
         /// <typeparam name="T">Entity class</typeparam>
