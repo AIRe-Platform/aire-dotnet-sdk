@@ -5,7 +5,7 @@ namespace Aire.Sdk.Models.Admin;
 public class Account
 {
     [JsonProperty("id", Required = Required.Always)]
-    public Guid Id { get; set; }
+    public string? Id { get; set; }
 
     [JsonProperty("username")]
     public string? Username { get; set; }
