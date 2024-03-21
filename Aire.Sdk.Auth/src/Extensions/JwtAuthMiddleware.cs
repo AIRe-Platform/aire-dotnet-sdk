@@ -86,15 +86,12 @@ namespace Aire.Sdk.Auth.Extensions
                     ClaimsPrincipal principal = _handler.ValidateToken(tokenString, _validationParams, out var jwt);
                     var token = (JwtSecurityToken)jwt;
 
-                    if (!Guid.TryParse(token.Subject, out Guid user))
-                        throw new InvalidCredentialException("Invalid subject format");
-
                     var key = token.Claims.FirstOrDefault(x => x.Type == AireClaims.UserEncryptionKey)?.Value;
                     if (string.IsNullOrWhiteSpace(key))
                         throw new InvalidCredentialException("Missing or invalid claim: " + AireClaims.UserEncryptionKey);
 
                     bool verified = token.Claims.FirstOrDefault(x => x.Type == AireClaims.VerifiedAccount)?.Value == "1";
-                    context.Features.Set(new JwtAuthFeature(principal, token, user, key!, tokenString, verified));
+                    context.Features.Set(new JwtAuthFeature(principal, token, token.Subject, key!, tokenString, verified));
                 }
                 catch (Exception ex)
                 {
