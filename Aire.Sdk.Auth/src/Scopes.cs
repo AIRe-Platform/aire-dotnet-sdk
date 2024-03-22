@@ -18,6 +18,11 @@ namespace Aire.Sdk.Auth
         public const string DeleteQuestionnaire = "questionnaire-delete";
         public static readonly AireScopes Questionnaire = [ReadQuestionnaire, WriteQuestionnaire, DeleteQuestionnaire];
 
+        public const string ReadContent = "content-read";
+        public const string WriteContent = "content-write";
+        public const string DeleteContent = "content-delete";
+        public static readonly AireScopes Content = [ReadContent, WriteContent, DeleteContent];
+
         public const string ReadDocument = "document-read";
         public const string WriteDocument = "document-write";
         public const string DeleteDocument = "document-delete";
@@ -42,6 +47,7 @@ namespace Aire.Sdk.Auth
             ChatHistory,
             ChatBot,
             Questionnaire,
+            Content,
             Document,
             DemoGroups,
             AireHub,
@@ -54,6 +60,7 @@ namespace Aire.Sdk.Auth
             ChatHistory,
             ChatBot,
             ReadQuestionnaire,
+            ReadContent,
             ReadDocument,
             PasswordChange
         );
@@ -69,7 +76,8 @@ namespace Aire.Sdk.Auth
             EditProfile,
             ChatBot,
             ChatHistory,
-            ReadQuestionnaire
+            ReadQuestionnaire,
+            ReadContent
         );
 
         public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {

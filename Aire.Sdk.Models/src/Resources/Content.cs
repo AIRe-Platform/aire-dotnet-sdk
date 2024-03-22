@@ -15,13 +15,13 @@ namespace Aire.Sdk.Models.Resources
         [JsonProperty("type")]
         public string? Type { get; set; }
         [JsonProperty("url")]
-        public string? URL { get; set; }
+        public string? Url { get; set; }
         [JsonProperty("views_count")]
-        public int? Views_count { get; set; }
+        public int? ViewsCount { get; set; }
         [JsonProperty("viewers_rating")]
-        public int? Viewers_rating { get; set; }
+        public int? ViewersRating { get; set; }
         [JsonProperty("injured_type")]
-        public string? Injured_type { get; set; }
+        public string? InjuredType { get; set; }
         [JsonProperty("age")]
         public string? Age { get; set; }
         [JsonProperty("gender")]
