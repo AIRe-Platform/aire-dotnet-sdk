@@ -5,11 +5,19 @@ namespace Aire.Sdk.Models.Platform
 {
     public class Service
     {
-        [JsonProperty("name", Required = Required.Always)]
+        [JsonProperty("id")]
+        [OpenApiProperty(Description = "Service identifier")]
+        public string? Id { get; set; }
+
+        [JsonProperty("name")]
         [OpenApiProperty(Description = "Name of the service")]
         public string? Name { get; set; }
 
-        [JsonProperty("modules", Required = Required.Always)]
+        [JsonProperty("owner")]
+        [OpenApiProperty(Description = "Resource owner's UUID")]
+        public string? Owner { get; set; }
+
+        [JsonProperty("modules")]
         [OpenApiProperty(Description = "List of available service modules")]
         public List<Module>? Modules { get; set; }
     }

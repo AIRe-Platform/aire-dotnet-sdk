@@ -38,10 +38,16 @@ namespace Aire.Sdk.Auth
         public const string DeleteDemoGroups = "demo-group-delete";
         public static readonly AireScopes DemoGroups = [ReadDemoGroups, EditDemoGroups, DeleteDemoGroups];
 
+        public const string ReadServices = "services-read";
+        public const string EditServices = "services-edit";
+        public const string DeleteServices = "services-delete";
+        public static readonly AireScopes Services = [ReadServices, EditServices, DeleteServices];
+
         public const string AireHub = "aire-hub";
         public const string PasswordChange = "password-change";
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
+        public const string AdminServices = "admin-services";
 
         public static readonly AireScopes AdminScopes = new(
             Profile,
@@ -51,10 +57,12 @@ namespace Aire.Sdk.Auth
             Content,
             Document,
             DemoGroups,
+            Services,
             AireHub,
             PasswordChange,
             AdminAccounts,
-            AdminClients
+            AdminClients,
+            AdminServices
         );
 
         public static readonly AireScopes UserScopes = new(
@@ -98,7 +106,7 @@ namespace Aire.Sdk.Auth
                     Add(item);
                 else if (item is AireScopes)
                     AddRange(item);
-                else 
+                else
                     throw new ArgumentException("Unsupported argument");
             }
         }
