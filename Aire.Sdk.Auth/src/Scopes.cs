@@ -41,6 +41,7 @@ namespace Aire.Sdk.Auth
         public const string AireHub = "aire-hub";
         public const string PasswordChange = "password-change";
         public const string AdminAccounts = "admin-accounts";
+        public const string AdminClients = "admin-clients";
 
         public static readonly AireScopes AdminScopes = new(
             Profile,
@@ -52,7 +53,8 @@ namespace Aire.Sdk.Auth
             DemoGroups,
             AireHub,
             PasswordChange,
-            AdminAccounts
+            AdminAccounts,
+            AdminClients
         );
 
         public static readonly AireScopes UserScopes = new(
