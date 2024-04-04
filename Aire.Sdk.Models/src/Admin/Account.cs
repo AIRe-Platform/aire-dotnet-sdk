@@ -10,8 +10,11 @@ public class Account
     [JsonProperty("username")]
     public string? Username { get; set; }
 
+    [JsonProperty("public_name")]
+    public string? PublicName { get; set; }
+
     [JsonProperty("verified")]
-    public bool? Verified { get; set;  }
+    public bool? Verified { get; set; }
 
     [JsonProperty("last_login")]
     public DateTime? LastLogin { get; set; }
