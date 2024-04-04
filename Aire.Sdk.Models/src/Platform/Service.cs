@@ -20,5 +20,9 @@ namespace Aire.Sdk.Models.Platform
         [JsonProperty("modules")]
         [OpenApiProperty(Description = "List of available service modules")]
         public List<Module>? Modules { get; set; }
+
+        [JsonProperty("active")]
+        [OpenApiProperty(Description = "Is the service enabled")]
+        public bool Active { get; set; }
     }
 }
