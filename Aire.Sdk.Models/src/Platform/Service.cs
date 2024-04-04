@@ -23,6 +23,6 @@ namespace Aire.Sdk.Models.Platform
 
         [JsonProperty("active")]
         [OpenApiProperty(Description = "Is the service enabled")]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
     }
 }
