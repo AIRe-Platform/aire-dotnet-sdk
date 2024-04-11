@@ -15,6 +15,15 @@ namespace Aire.Sdk.Azure
             where T: class, ITableEntity, new();
 
         /// <summary>
+        /// Retrieve all entities in partition
+        /// </summary>
+        /// <typeparam name="T">Entity class</typeparam>
+        /// <param name="partitionKey">Partition key</param>
+        /// <returns>List of entities</returns>
+        Task<List<T>> Partition<T>(string partitionKey)
+            where T: class, ITableEntity, new();
+
+        /// <summary>
         /// Retrieves an entity using the key as both the partition key and row key
         /// </summary>
         /// <typeparam name="T">Entity class</typeparam>

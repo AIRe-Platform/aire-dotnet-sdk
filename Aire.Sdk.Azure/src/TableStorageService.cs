@@ -50,6 +50,12 @@ namespace Aire.Sdk.Azure
             return await client.QueryAsync<T>().ToListAsync();
         }
 
+        public async Task<List<T>> Partition<T>(string partitionKey) where T : class, ITableEntity, new()
+        {
+            var client = await GetTableClientAsync(typeof(T));
+            return await client.QueryAsync<T>(x => x.PartitionKey == partitionKey).ToListAsync();
+        }
+
         public async Task<T?> RetrieveAsync<T>(string key) where T : class, ITableEntity, new()
         {
             return await RetrieveAsync<T>(key, key);
