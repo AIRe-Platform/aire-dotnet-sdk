@@ -3,18 +3,17 @@ using System.Reflection;
 using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Aire.Sdk.Azure
 {
     public class TableStorageService : ITableStorageService
     {
-        private readonly TableServiceClient svcClient;
+        private readonly TableServiceClient client;
         private readonly ILogger<TableStorageService> log;
 
-        public TableStorageService(IOptions<TableStorageConfiguration> options, ILogger<TableStorageService> log)
+        public TableStorageService(TableServiceClient client, ILogger<TableStorageService> log)
         {
-            svcClient = new TableServiceClient(options.Value.ConnectionString);
+            this.client = client;
             this.log = log;
         }
 
@@ -39,7 +38,7 @@ namespace Aire.Sdk.Azure
                     nameof(t));
             }
 
-            var table = svcClient.GetTableClient(tableName);
+            var table = client.GetTableClient(tableName);
             await table.CreateIfNotExistsAsync();
             return table;
         }
