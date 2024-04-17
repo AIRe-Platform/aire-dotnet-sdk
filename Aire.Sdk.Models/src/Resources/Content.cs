@@ -22,10 +22,12 @@ namespace Aire.Sdk.Models.Resources
         public int? ViewersRating { get; set; }
         [JsonProperty("injured_type")]
         public string? InjuredType { get; set; }
-        [JsonProperty("age")]
+        [JsonProperty("modified")]
         public DateTime Modified { get; set; }
         [JsonProperty("keywords")]
         public string[]? Keywords { get; set; }
+        [JsonProperty("blobName")]
+        public string? BlobName { get; set; }
         
 
 
