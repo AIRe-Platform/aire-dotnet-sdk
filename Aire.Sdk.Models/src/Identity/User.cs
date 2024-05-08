@@ -17,6 +17,12 @@ public enum UserGender
     Other
 }
 
+public class UserPreferences
+{
+    [JsonProperty("experimental_custom_prompt", NullValueHandling = NullValueHandling.Ignore)]
+    public string? CustomPrompt { get; set; }
+}
+
 public class UserPrivate
 {
     [JsonProperty("first_name")]
@@ -45,6 +51,9 @@ public class UserPrivate
 
     [JsonProperty("connected_services")]
     public List<UserServiceCredentials>? ConnectedServices { get; set; }
+
+    [JsonProperty("preferences")]
+    public UserPreferences? Preferences { get; set; }
 }
 
 public class User : UserPrivate

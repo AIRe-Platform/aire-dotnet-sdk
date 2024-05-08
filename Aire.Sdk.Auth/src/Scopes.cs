@@ -48,6 +48,9 @@ namespace Aire.Sdk.Auth
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
 
+        public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
+        public static readonly AireScopes Experimental = [ExperimentalCustomPrompt];
+
         public static readonly AireScopes AdminScopes = new(
             Profile,
             ChatHistory,
@@ -60,7 +63,8 @@ namespace Aire.Sdk.Auth
             AireHub,
             PasswordChange,
             AdminAccounts,
-            AdminClients
+            AdminClients,
+            ExperimentalCustomPrompt
         );
 
         public static readonly AireScopes UserScopes = new(
