@@ -35,7 +35,7 @@ public static class ContentTypeExtensions
 public class Content
 {
     [JsonProperty("id")]
-    public Guid? Id { get; set; } = Guid.NewGuid();
+    public Guid? Id { get; set; }
 
     [JsonProperty("name")]
     public string? Name { get; set; }
