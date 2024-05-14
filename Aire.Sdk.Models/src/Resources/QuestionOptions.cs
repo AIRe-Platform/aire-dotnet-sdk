@@ -40,6 +40,9 @@ namespace Aire.Sdk.Models.Resources
 
         [JsonProperty("multiselect")]
         public bool Multiselect { get; set; } = true;
+
+        [JsonProperty("red_flag")]
+        public string? RedFlag { get; set; }
     }
 
     public class QuestionOptionOpen : QuestionOption
