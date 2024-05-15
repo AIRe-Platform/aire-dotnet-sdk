@@ -103,5 +103,11 @@ namespace Aire.Sdk.Azure
             var client = await GetTableClientAsync(typeof(T));
             return client.QueryAsync(expression);
         }
+
+        public async Task<AsyncPageable<T>> QueryAsync<T>(string filter) where T : class, ITableEntity, new()
+        {
+            var client = await GetTableClientAsync(typeof(T));
+            return client.QueryAsync<T>(filter);
+        }
     }
 }

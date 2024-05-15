@@ -79,5 +79,14 @@ namespace Aire.Sdk.Azure
         /// <returns>Async pageable</returns>
         Task<AsyncPageable<T>> QueryAsync<T>(Expression<Func<T, bool>> expression)
             where T: class, ITableEntity, new();
+
+        /// <summary>
+        /// Queries entities
+        /// </summary>
+        /// <typeparam name="T">Entity class</typeparam>
+        /// <param name="filter">Query filter</param>
+        /// <returns>Async pageable</returns>
+        Task<AsyncPageable<T>> QueryAsync<T>(string filter)
+            where T: class, ITableEntity, new();
     }
 }
