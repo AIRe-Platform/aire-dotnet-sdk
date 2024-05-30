@@ -58,6 +58,12 @@ public class Content
     [JsonProperty("viewers_rating")]
     public int? ViewersRating { get; set; }
 
+    [JsonProperty("thumbs_up")]
+    public int? ThumbsUp { get; set; }
+   
+    [JsonProperty("thumbs_down")]
+    public int? ThumbsDown { get; set; }
+
     [JsonProperty("modified")]
     public DateTime Modified { get; set; }
 
