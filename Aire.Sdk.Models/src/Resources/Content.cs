@@ -22,7 +22,7 @@ public enum ContentType
 
 public static class ContentTypeExtensions
 {
-    public static bool IsBlobType(this ContentType type)
+    public static bool IsBlobType(this ContentType? type)
     {
         return type switch
         {
