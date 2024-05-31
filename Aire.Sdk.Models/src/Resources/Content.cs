@@ -53,16 +53,16 @@ public class Content
     public ContentType? Type { get; set; }
 
     [JsonProperty("views")]
-    public int? Views { get; set; }
+    public int Views { get; set; }
 
     [JsonProperty("score")]
-    public int? Score { get; set; }
+    public int Score { get; set; }
 
     [JsonProperty("thumbs_up")]
-    public int? ThumbsUp { get; set; }
+    public int ThumbsUp { get; set; }
    
     [JsonProperty("thumbs_down")]
-    public int? ThumbsDown { get; set; }
+    public int ThumbsDown { get; set; }
 
     [JsonProperty("modified")]
     public DateTime Modified { get; set; }
