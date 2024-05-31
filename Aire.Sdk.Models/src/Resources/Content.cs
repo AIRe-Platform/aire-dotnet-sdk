@@ -52,11 +52,11 @@ public class Content
     [JsonProperty("type")]
     public ContentType? Type { get; set; }
 
-    [JsonProperty("views_count")]
-    public int? ViewsCount { get; set; }
+    [JsonProperty("views")]
+    public int? Views { get; set; }
 
-    [JsonProperty("viewers_rating")]
-    public int? ViewersRating { get; set; }
+    [JsonProperty("score")]
+    public int? Score { get; set; }
 
     [JsonProperty("thumbs_up")]
     public int? ThumbsUp { get; set; }
