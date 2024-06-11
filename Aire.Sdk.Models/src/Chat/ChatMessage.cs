@@ -27,7 +27,11 @@ namespace Aire.Sdk.Models.Chat
         public QuestionAnswer? Question { get; set; }
 
         [JsonProperty("hidden")]
-        [OpenApiProperty(Description = "Hides message from chat")]
+        [OpenApiProperty(Description = "Hides message from the chat")]
         public bool Hidden { get; set; } = false;
+
+        [JsonProperty("media")]
+        [OpenApiProperty(Description = "List of media content identifiers")]
+        public List<string>? Media { get; set; }
     }
 }
