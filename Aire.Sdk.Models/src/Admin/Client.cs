@@ -23,4 +23,13 @@ public class Client
 
     [JsonProperty("scopes")]
     public List<string>? Scopes { get; set; }
+
+    [JsonProperty("public")]
+    public bool? Public { get; set; }
+
+    [JsonProperty("require_consent")]
+    public bool? RequireConsent { get; set; }
+
+    [JsonProperty("secret")]
+    public string? Secret { get; set; }
 }

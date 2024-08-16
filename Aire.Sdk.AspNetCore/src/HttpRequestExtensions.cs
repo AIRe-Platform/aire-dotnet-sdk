@@ -22,8 +22,9 @@ namespace Aire.Sdk.AspNetCore
 
         public static string? ReadParam(this HttpRequest req, string param)
         {
-            string? value = req.Form[param];
-            value ??= req.Query[param];
+            string? value = req.Query[param];
+            if(value == null && req.HasFormContentType)
+                value = req.Form[param];
             return value;
         }
 

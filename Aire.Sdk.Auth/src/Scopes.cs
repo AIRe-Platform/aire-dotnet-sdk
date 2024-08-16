@@ -50,6 +50,7 @@ namespace Aire.Sdk.Auth
         public const string Keywords = "keywords";
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
+        public const string Auth = "auth";
 
         public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
         public static readonly AireScopes Experimental = [ExperimentalCustomPrompt];
