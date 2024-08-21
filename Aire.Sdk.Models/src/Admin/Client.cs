@@ -27,4 +27,7 @@ public class Client
 
     [JsonProperty("secret")]
     public string? Secret { get; set; }
+
+    [JsonProperty("grant_types")]
+    public List<string>? GrantTypes { get; set; }
 }
