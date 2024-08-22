@@ -55,6 +55,7 @@ namespace Aire.Sdk.Auth
         public const string Keywords = "keywords";
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
+
         public const string Auth = "auth";
 
         public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
@@ -102,6 +103,23 @@ namespace Aire.Sdk.Auth
             ReadQuestionnaire,
             ReadContent,
             RateContent
+        );
+
+        public static readonly AireScopes AllClientScopes = new(
+            Profile,
+            ChatHistory,
+            Questionnaire,
+            Content,
+            Document,
+            ChatBot,
+            DemoGroups,
+            Services,
+            AireHub,
+            PasswordChange,
+            Keywords,
+            AdminAccounts,
+            AdminClients,
+            Experimental
         );
 
         public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
