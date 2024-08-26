@@ -4,6 +4,8 @@
 
 
 using Aire.Sdk.AspNetCore;
+using Aire.Sdk.Models;
+using Aire.Sdk.Models.Chat;
 using Aire.Sdk.Models.Platform;
 using Microsoft.Extensions.Logging;
 
@@ -19,6 +21,30 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
         _log = log;
     }
 
+    public async Task<List<ChatLogMetadata>?> GetChatHistory()
+    {
+        var req = new HttpRequestMessage(HttpMethod.Get, "v1/chat-history");
+        var response = await _httpClient.SendAsync(req);
+        
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<List<ChatLogMetadata>>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
+    }
+
+    public async Task<ChatLog?> GetChatlog(string id)
+    {
+        var req = new HttpRequestMessage(HttpMethod.Get, "v1/chat-history/" + id);
+        var response = await _httpClient.SendAsync(req);
+        
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<ChatLog>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
+    }
+
     public async Task<bool> DeleteUserData(bool anonymize)
     {
         var query = new Dictionary<string, string?> {
@@ -31,5 +57,17 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
 
         await LogIfErrorResponse(response, _log);
         return response.IsSuccessStatusCode;
+    }
+
+    public async Task<GDPRDataCollection?> GetUserData()
+    {
+        var req = new HttpRequestMessage(HttpMethod.Get, "v1/user-data");
+        var response = await _httpClient.SendAsync(req);
+        
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<GDPRDataCollection>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
     }
 }
