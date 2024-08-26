@@ -30,9 +30,9 @@ public class GDPRDataCollection : Dictionary<string, object?>
     }
 
     [JsonProperty("chatlogs")]
-    public List<ChatLog>? Chatlogs
+    public Dictionary<string, ChatLog>? Chatlogs
     {
-        get => GetTyped<List<ChatLog>>("chatlogs");
+        get => GetTyped<Dictionary<string, ChatLog>>("chatlogs");
         set => this["chatlogs"] = value;
     }
 
