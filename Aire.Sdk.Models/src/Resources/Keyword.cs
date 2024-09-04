@@ -11,6 +11,16 @@ public class KeywordStats : Dictionary<string, dynamic>
 {
 }
 
+public class Translation
+{ 
+    [JsonProperty("value")]
+    public string? Value { get; set; }
+
+    [JsonProperty("languageID")]
+    public string? languageID { get; set; }
+
+}
+
 public class Keyword
 {
     [JsonProperty("value", Required = Required.Always)]
@@ -18,4 +28,7 @@ public class Keyword
 
     [JsonProperty("stats", Required = Required.Always)]
     public KeywordStats? Stats { get; set; }
+
+    [JsonProperty("translations")]
+    public List<Translation>? Translations { get; set; }
 }
