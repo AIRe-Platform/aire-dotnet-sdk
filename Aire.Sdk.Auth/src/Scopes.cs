@@ -30,6 +30,12 @@ namespace Aire.Sdk.Auth
 
         public static readonly AireScopes Content = [ReadContent, WriteContent, DeleteContent, RateContent];
 
+        public const string ReadScheduledEvent = "event-read";
+        public const string WriteScheduledEvent = "event-write";
+        public const string DeleteScheduledEvent = "event-delete";
+
+        public static readonly AireScopes ScheduledEvent = [ReadScheduledEvent, WriteScheduledEvent, DeleteScheduledEvent];
+
         public const string ReadDocument = "document-read";
         public const string WriteDocument = "document-write";
         public const string DeleteDocument = "document-delete";
@@ -67,6 +73,7 @@ namespace Aire.Sdk.Auth
             ChatBot,
             Questionnaire,
             Content,
+            ScheduledEvent,
             Document,
             DemoGroups,
             Services,
@@ -82,6 +89,7 @@ namespace Aire.Sdk.Auth
             Profile,
             ChatHistory,
             ChatBot,
+            ScheduledEvent,
             ReadQuestionnaire,
             ReadContent,
             RateContent,
@@ -110,6 +118,7 @@ namespace Aire.Sdk.Auth
             ChatHistory,
             Questionnaire,
             Content,
+            ScheduledEvent,
             Document,
             ChatBot,
             DemoGroups,
