@@ -31,4 +31,7 @@ public class Keyword
 
     [JsonProperty("translations")]
     public List<Translation>? Translations { get; set; }
+
+    [JsonProperty("prompt")]
+    public string? Prompt { get; set; }
 }
