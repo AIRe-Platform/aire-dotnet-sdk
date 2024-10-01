@@ -11,6 +11,10 @@ namespace Aire.Sdk.Models.Chat
 {
     public class ChatMessage
     {
+        [JsonProperty("type")]
+        [OpenApiProperty(Description = "Indicates the type of the message")]
+        public string? Type { get; set; }
+
         [JsonProperty("role", Required = Required.Always)]
         [OpenApiProperty(Description = "The role of the message's author")]
         public ChatRole? Role { get; set; }
