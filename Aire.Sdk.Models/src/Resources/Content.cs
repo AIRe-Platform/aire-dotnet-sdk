@@ -51,6 +51,12 @@ public class Content
     [JsonProperty("hidden")]
     public bool? Hidden { get; set; }
 
+        [JsonProperty("add_thumbnail")]
+    public bool? AddThumbnail { get; set; }
+
+    [JsonProperty("thumbnailUrl")]
+    public string? ThumbnailUrl { get; set; }
+
     [JsonProperty("url")]
     public string? Url { get; set; }
 
