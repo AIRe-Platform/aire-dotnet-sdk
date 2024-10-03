@@ -51,7 +51,7 @@ public class Content
     [JsonProperty("hidden")]
     public bool? Hidden { get; set; }
 
-        [JsonProperty("add_thumbnail")]
+    [JsonProperty("add_thumbnail")]
     public bool? AddThumbnail { get; set; }
 
     [JsonProperty("thumbnailUrl")]
