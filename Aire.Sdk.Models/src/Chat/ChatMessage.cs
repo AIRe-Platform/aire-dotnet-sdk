@@ -42,5 +42,9 @@ namespace Aire.Sdk.Models.Chat
         [JsonProperty("media")]
         [OpenApiProperty(Description = "List of media content identifiers")]
         public List<string>? Media { get; set; }
+
+        [JsonProperty("event")]
+        [OpenApiProperty(Description = "Event associated with the message")]
+        public ScheduledEvent? Event { get; set; }
     }
 }
