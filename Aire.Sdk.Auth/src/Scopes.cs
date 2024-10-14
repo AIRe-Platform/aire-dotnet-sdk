@@ -162,8 +162,8 @@ namespace Aire.Sdk.Auth
             foreach (var item in collection)
             {
                 if (item is string)
-                    if (ScopeAliasDict.ContainsKey(item))
-                        AddRange(ScopeAliasDict[item]);
+                    if (ScopeAliasDict != null && ScopeAliasDict.ContainsKey(item))
+                        AddRange(ScopeAliasDict?[item]);
                     else
                         Add(item);
                 else if (item is AireScopes)
