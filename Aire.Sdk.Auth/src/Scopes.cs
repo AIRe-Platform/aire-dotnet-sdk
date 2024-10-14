@@ -27,11 +27,13 @@ namespace Aire.Sdk.Auth
         public const string WriteContent = "content-write";
         public const string DeleteContent = "content-delete";
         public const string RateContent = "content-rate";
+
         public static readonly AireScopes Content = [ReadContent, WriteContent, DeleteContent, RateContent];
 
         public const string ReadScheduledEvent = "event-read";
         public const string WriteScheduledEvent = "event-write";
         public const string DeleteScheduledEvent = "event-delete";
+
         public static readonly AireScopes ScheduledEvent = [ReadScheduledEvent, WriteScheduledEvent, DeleteScheduledEvent];
 
         public const string ReadDocument = "document-read";
@@ -54,13 +56,9 @@ namespace Aire.Sdk.Auth
         public const string DeleteServices = "services-delete";
         public static readonly AireScopes Services = [ReadServices, EditServices, DeleteServices];
 
-        public const string ReadKeywords = "keywords-read";
-        public const string WriteKeywords = "keywords-write";
-        public const string DeleteKeywords = "keywords-delete";
-        public static readonly AireScopes Keywords = [ReadKeywords, WriteKeywords, DeleteKeywords];
-
         public const string AireHub = "aire-hub";
         public const string PasswordChange = "password-change";
+        public const string Keywords = "keywords";
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
 
@@ -96,7 +94,6 @@ namespace Aire.Sdk.Auth
             ReadContent,
             RateContent,
             ReadDocument,
-            ReadKeywords,
             PasswordChange
         );
 
@@ -141,31 +138,13 @@ namespace Aire.Sdk.Auth
             { AireRoles.DemoUser, DemoUserScopes }
         };
 
-        public static readonly Dictionary<string, AireScopes> ScopeAliasDict = new() {
-            { "admin", AdminScopes },
-            { "chat", ChatBot },
-            { "chat-history", ChatHistory },
-            { "content", Content },
-            { "demo-admin", DemoAdminScopes },
-            { "demo-groups", DemoGroups },
-            { "document", Document },
-            { "event", ScheduledEvent },
-            { "keywords", Keywords },
-            { "profile", Profile },
-            { "questionnaire", Questionnaire },
-            { "services", Services },
-        };
-
         public AireScopes() : base() { }
         public AireScopes(params dynamic[] collection) : base()
         {
             foreach (var item in collection)
             {
                 if (item is string)
-                    if (ScopeAliasDict.ContainsKey(item))
-                        AddRange(ScopeAliasDict[item]);
-                    else
-                        Add(item);
+                    Add(item);
                 else if (item is AireScopes)
                     AddRange(item);
                 else
