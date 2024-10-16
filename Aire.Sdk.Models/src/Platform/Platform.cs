@@ -17,5 +17,9 @@ namespace Aire.Sdk.Models.Platform
         [JsonProperty("modules", Required = Required.Always)]
         [OpenApiProperty(Description = "Dictionary of the service's core modules")]
         public Dictionary<ModuleType, Module>? Modules { get; set; }
+
+        [JsonProperty("settings")]
+        [OpenApiProperty(Description = "Settings of the AIRe instance")]
+        public InstanceSettings? Settings { get; set; }
     }
 }
