@@ -29,10 +29,10 @@ namespace Aire.Sdk.Auth
         public const string RateContent = "content-rate";
         public static readonly AireScopes Content = [ReadContent, WriteContent, DeleteContent, RateContent];
 
-        public const string ReadScheduledEvent = "event-read";
-        public const string WriteScheduledEvent = "event-write";
-        public const string DeleteScheduledEvent = "event-delete";
-        public static readonly AireScopes ScheduledEvent = [ReadScheduledEvent, WriteScheduledEvent, DeleteScheduledEvent];
+        public const string ReadReminders = "reminder-read";
+        public const string WriteReminders = "reminder-write";
+        public const string DeleteReminders = "reminder-delete";
+        public static readonly AireScopes Reminders = [ReadReminders, WriteReminders, DeleteReminders];
 
         public const string ReadDocument = "document-read";
         public const string WriteDocument = "document-write";
@@ -75,7 +75,7 @@ namespace Aire.Sdk.Auth
             ChatBot,
             Questionnaire,
             Content,
-            ScheduledEvent,
+            Reminders,
             Document,
             DemoGroups,
             Services,
@@ -91,7 +91,7 @@ namespace Aire.Sdk.Auth
             Profile,
             ChatHistory,
             ChatBot,
-            ScheduledEvent,
+            Reminders,
             ReadQuestionnaire,
             ReadContent,
             RateContent,
@@ -121,7 +121,7 @@ namespace Aire.Sdk.Auth
             ChatHistory,
             Questionnaire,
             Content,
-            ScheduledEvent,
+            Reminders,
             Document,
             ChatBot,
             DemoGroups,
@@ -149,7 +149,7 @@ namespace Aire.Sdk.Auth
             { "demo-admin", DemoAdminScopes },
             { "demo-groups", DemoGroups },
             { "document", Document },
-            { "event", ScheduledEvent },
+            { "reminders", Reminders },
             { "keywords", Keywords },
             { "profile", Profile },
             { "questionnaire", Questionnaire },

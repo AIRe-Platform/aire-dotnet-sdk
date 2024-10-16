@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Aire.Sdk.Models.Resources;
 
-public class ScheduledEvent
+public class Reminder
 {
     [JsonProperty("id")]
     public Guid? Id { get; set; }
@@ -19,5 +19,11 @@ public class ScheduledEvent
     public long? ReadTimestamp { get; set; }
 
     [JsonProperty("content")]
-    public ScheduledEventContent? Content { get; set; }
+    public ReminderContent? Content { get; set; }
+}
+
+public class ReminderContent
+{
+    [JsonProperty("message", Required = Required.Always)]
+    public string Message { get; set; } = string.Empty;
 }
