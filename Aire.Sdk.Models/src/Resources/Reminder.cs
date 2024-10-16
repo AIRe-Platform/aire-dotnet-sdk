@@ -18,6 +18,9 @@ public class Reminder
     [JsonProperty("read_timestamp")]
     public long? ReadTimestamp { get; set; }
 
+    [JsonProperty("chat_id")]
+    public string? ChatId { get; set; }
+
     [JsonProperty("content")]
     public ReminderContent? Content { get; set; }
 }
