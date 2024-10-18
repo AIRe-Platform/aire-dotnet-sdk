@@ -39,8 +39,8 @@ public class UserPrivate
     [JsonProperty("gender")]
     public UserGender? Gender { get; set; }
 
-    [JsonProperty("age")]
-    public int? Age { get; set; }
+    [JsonProperty("year_of_birth")]
+    public int? YearOfBirth { get; set; }
 
     [JsonProperty("email")]
     public string? Email { get; set; }
