@@ -80,4 +80,7 @@ public class Content
 
     [JsonProperty("keywords")]
     public string[]? Keywords { get; set; }
+    
+    [JsonProperty("fileName")]
+    public string? FileName { get; set; }
 }
