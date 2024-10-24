@@ -111,9 +111,12 @@ namespace Aire.Sdk.Auth
             EditProfile,
             ChatBot,
             ChatHistory,
+            Reminders,
             ReadQuestionnaire,
             ReadContent,
-            RateContent
+            RateContent,
+            ReadDocument,
+            ReadKeywords
         );
 
         public static readonly AireScopes AllClientScopes = new(
