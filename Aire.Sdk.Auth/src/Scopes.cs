@@ -116,7 +116,8 @@ namespace Aire.Sdk.Auth
             ReadContent,
             RateContent,
             ReadDocument,
-            ReadKeywords
+            ReadKeywords,
+            PasswordChange
         );
 
         public static readonly AireScopes AllClientScopes = new(
