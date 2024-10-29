@@ -7,10 +7,6 @@ using Newtonsoft.Json;
 
 namespace Aire.Sdk.Models.Resources;
 
-public class KeywordStats : Dictionary<string, dynamic>
-{
-}
-
 public class Translation
 { 
     [JsonProperty("value")]
@@ -18,7 +14,6 @@ public class Translation
 
     [JsonProperty("languageID")]
     public string? languageID { get; set; }
-
 }
 
 public class Keyword
@@ -27,7 +22,7 @@ public class Keyword
     public string? Value { get; set; }
 
     [JsonProperty("stats", Required = Required.Always)]
-    public KeywordStats? Stats { get; set; }
+    public Dictionary<string, dynamic>? Stats { get; set; }
 
     [JsonProperty("translations")]
     public List<Translation>? Translations { get; set; }
