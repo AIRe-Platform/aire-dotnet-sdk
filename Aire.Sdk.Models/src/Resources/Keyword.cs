@@ -13,7 +13,7 @@ public class Translation
     public string? Value { get; set; }
 
     [JsonProperty("languageID")]
-    public string? languageID { get; set; }
+    public string? LanguageID { get; set; }
 }
 
 public class Keyword
