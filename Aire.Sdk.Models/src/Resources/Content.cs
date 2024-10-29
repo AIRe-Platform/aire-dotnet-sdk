@@ -83,4 +83,7 @@ public class Content
     
     [JsonProperty("fileName")]
     public string? FileName { get; set; }
+
+    [JsonProperty("thumbnailFileName")]
+    public string? ThumbnailFileName { get; set; }
 }
