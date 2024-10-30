@@ -54,7 +54,7 @@ public class Content
     [JsonProperty("add_thumbnail")]
     public bool? AddThumbnail { get; set; }
 
-    [JsonProperty("thumbnailUrl")]
+    [JsonProperty("thumbnail_url")]
     public string? ThumbnailUrl { get; set; }
 
     [JsonProperty("url")]
@@ -81,9 +81,9 @@ public class Content
     [JsonProperty("keywords")]
     public string[]? Keywords { get; set; }
     
-    [JsonProperty("fileName")]
+    [JsonProperty("file_name")]
     public string? FileName { get; set; }
 
-    [JsonProperty("thumbnailFileName")]
+    [JsonProperty("thumbnail_file_name")]
     public string? ThumbnailFileName { get; set; }
 }
