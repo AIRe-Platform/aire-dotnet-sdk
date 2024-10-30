@@ -87,3 +87,21 @@ public class Content
     [JsonProperty("thumbnail_file_name")]
     public string? ThumbnailFileName { get; set; }
 }
+
+/// <summary>
+/// Embedding metadata for content
+/// </summary>
+public class ContentMetadata
+{
+    [JsonProperty("id")]
+    public string? Id { get; set; }
+
+    [JsonProperty("type")]
+    public ContentType? Type { get; set; }
+
+    [JsonProperty("keywords")]
+    public string? Keywords { get; set; } // delimited with spaces
+
+    [JsonProperty("relevance")]
+    public float? Relevance { get; set; }
+}

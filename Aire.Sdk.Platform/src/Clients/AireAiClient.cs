@@ -6,6 +6,7 @@
 using Aire.Sdk.AspNetCore;
 using Aire.Sdk.Models.Platform;
 using Aire.Sdk.Models.Resources;
+using Aire.Sdk.Platform.Clients.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Aire.Sdk.Platform.Clients;
@@ -36,7 +37,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<EmbeddingResponse?> EmbedQuestionnaire(Questionnaire questionnaire)
+    public async Task<EmbeddingResponse?> CreateQuestionnaireEmbedding(Questionnaire questionnaire)
     {
         var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/questionnaire")
         {
@@ -54,6 +55,46 @@ public class AireAiClient : AireClientBase, IAireAiClient
     public async Task<bool> DeleteQuestionnaireEmbedding(string id)
     {
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/questionnaire/{id}");
+        var response = await _httpClient.SendAsync(req);
+
+        await LogIfErrorResponse(response, _log);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<ContentQueryResponse?> SearchContent(string search)
+    {
+        var query = new Dictionary<string, string?> {
+            { "query", search }
+        };
+        string path = "embeddings/content" + QueryString.FromDictionary(query);
+        var req = new HttpRequestMessage(HttpMethod.Get, path);
+        var response = await _httpClient.SendAsync(req);
+
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<ContentQueryResponse>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
+    }
+
+    public async Task<EmbeddingResponse?> CreateContentEmbedding(Content content)
+    {
+        var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/content")
+        {
+            Content = new JsonContent<Content>(content)
+        };
+        var response = await _httpClient.SendAsync(req);
+
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<EmbeddingResponse>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
+    }
+    
+    public async Task<bool> DeleteContentEmbedding(string id)
+    {
+        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/content/{id}");
         var response = await _httpClient.SendAsync(req);
 
         await LogIfErrorResponse(response, _log);

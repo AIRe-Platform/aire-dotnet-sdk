@@ -4,6 +4,7 @@
 
 
 using Aire.Sdk.Models.Resources;
+using Aire.Sdk.Platform.Clients.Models;
 
 namespace Aire.Sdk.Platform.Clients;
 
@@ -21,7 +22,7 @@ public interface IAireAiClient
     /// </summary>
     /// <param name="questionnaire">Questionnaire object</param>
     /// <returns>Document IDs</returns>
-    public abstract Task<EmbeddingResponse?> EmbedQuestionnaire(Questionnaire questionnaire);
+    public abstract Task<EmbeddingResponse?> CreateQuestionnaireEmbedding(Questionnaire questionnaire);
 
     /// <summary>
     /// Removes questionnaire embedding
@@ -29,4 +30,25 @@ public interface IAireAiClient
     /// <param name="id">Document ID received after embedding</param>
     /// <returns>True if request succeeded, otherwise false</returns>
     public abstract Task<bool> DeleteQuestionnaireEmbedding(string id);
+
+    /// <summary>
+    /// Search content with similarity search
+    /// </summary>
+    /// <param name="search">Search string</param>
+    /// <returns>List of questionnaire IDs sorted by relevance</returns>
+    public abstract Task<ContentQueryResponse?> SearchContent(string search);
+
+    /// <summary>
+    /// Embeds content for RAG and similarity search
+    /// </summary>
+    /// <param name="questionnaire">Questionnaire object</param>
+    /// <returns>Document IDs</returns>
+    public abstract Task<EmbeddingResponse?> CreateContentEmbedding(Content content);
+
+    /// <summary>
+    /// Removes content embedding
+    /// </summary>
+    /// <param name="id">Document ID received after embedding</param>
+    /// <returns>True if request succeeded, otherwise false</returns>
+    public abstract Task<bool> DeleteContentEmbedding(string id);
 }
