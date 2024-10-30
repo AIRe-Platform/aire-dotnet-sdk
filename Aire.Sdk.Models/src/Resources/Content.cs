@@ -100,7 +100,7 @@ public class ContentMetadata
     public ContentType? Type { get; set; }
 
     [JsonProperty("keywords")]
-    public string? Keywords { get; set; } // delimited with spaces
+    public string[]? Keywords { get; set; }
 
     [JsonProperty("relevance")]
     public float? Relevance { get; set; }
