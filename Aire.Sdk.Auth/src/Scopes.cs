@@ -59,12 +59,13 @@ namespace Aire.Sdk.Auth
         public const string DeleteKeywords = "keywords-delete";
         public static readonly AireScopes Keywords = [ReadKeywords, WriteKeywords, DeleteKeywords];
 
-        public const string AireHub = "aire-hub";
-        public const string PasswordChange = "password-change";
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
+        public const string AdminInstanceSettings = "admin-instance-settings";
 
         public const string Auth = "auth";
+        public const string AireHub = "aire-hub";
+        public const string PasswordChange = "password-change";
 
         public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
         public static readonly AireScopes Experimental = [ExperimentalCustomPrompt];
@@ -84,6 +85,7 @@ namespace Aire.Sdk.Auth
             Keywords,
             AdminAccounts,
             AdminClients,
+            AdminInstanceSettings,
             ExperimentalCustomPrompt
         );
 
@@ -134,6 +136,7 @@ namespace Aire.Sdk.Auth
             Keywords,
             AdminAccounts,
             AdminClients,
+            AdminInstanceSettings,
             Experimental
         );
 
