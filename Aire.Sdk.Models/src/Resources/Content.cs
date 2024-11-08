@@ -86,6 +86,15 @@ public class Content
 
     [JsonProperty("thumbnail_file_name")]
     public string? ThumbnailFileName { get; set; }
+
+    [JsonProperty("date_content_shown")]
+    public long DateContentShown { get; set; }
+    
+    [JsonProperty("chat_id")]
+    public string? ChatId { get; set; }
+
+    [JsonProperty("copyright")]
+    public string? Copyright { get; set; }
 }
 
 /// <summary>
