@@ -59,6 +59,10 @@ namespace Aire.Sdk.Auth
         public const string DeleteKeywords = "keywords-delete";
         public static readonly AireScopes Keywords = [ReadKeywords, WriteKeywords, DeleteKeywords];
 
+        public const string ReadStatistics = "statistics-read";
+        public const string WriteStatistics = "statistics-write";
+        public static readonly AireScopes Statistics = [ReadStatistics, WriteStatistics];
+
         public const string AdminAccounts = "admin-accounts";
         public const string AdminClients = "admin-clients";
         public const string AdminInstanceSettings = "admin-instance-settings";
@@ -83,6 +87,7 @@ namespace Aire.Sdk.Auth
             AireHub,
             PasswordChange,
             Keywords,
+            Statistics,
             AdminAccounts,
             AdminClients,
             AdminInstanceSettings,
@@ -99,7 +104,8 @@ namespace Aire.Sdk.Auth
             RateContent,
             ReadDocument,
             ReadKeywords,
-            PasswordChange
+            PasswordChange,
+            WriteStatistics
         );
 
         public static readonly AireScopes DemoAdminScopes = new(
@@ -118,7 +124,8 @@ namespace Aire.Sdk.Auth
             ReadContent,
             RateContent,
             ReadDocument,
-            ReadKeywords
+            ReadKeywords,
+            WriteStatistics
         );
 
         public static readonly AireScopes AllClientScopes = new(
@@ -134,6 +141,7 @@ namespace Aire.Sdk.Auth
             AireHub,
             PasswordChange,
             Keywords,
+            Statistics,
             AdminAccounts,
             AdminClients,
             AdminInstanceSettings,
@@ -160,6 +168,7 @@ namespace Aire.Sdk.Auth
             { "profile", Profile },
             { "questionnaire", Questionnaire },
             { "services", Services },
+            { "statistics", Statistics }
         };
 
         public AireScopes() : base() { }
