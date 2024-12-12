@@ -22,7 +22,11 @@ namespace Aire.Sdk.Models.Resources
         Open,
 
         [EnumMember(Value = "number")]
-        Number
+        Number,
+
+        [EnumMember(Value = "content")]
+        Content
+
     }
 
     public class QuestionOption
