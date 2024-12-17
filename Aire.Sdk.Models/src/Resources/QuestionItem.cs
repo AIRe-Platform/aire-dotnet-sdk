@@ -12,6 +12,9 @@ namespace Aire.Sdk.Models.Resources
         [JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         public string? Id { get; set; }
 
+        [JsonProperty("feedback_id")]
+        public string? feedbackId { get; set; }
+
         [JsonProperty("question", Required = Newtonsoft.Json.Required.Always)]
         public string? Question { get; set; }
 
