@@ -26,7 +26,9 @@ public class Questionnaire
 
     [JsonProperty("content", Required = Required.Always)]
     public List<QuestionnaireContent>? Content { get; set; }
-
+    
+    [JsonProperty("isFeedback")]
+        public bool IsFeedback { get; set; }
     public Questionnaire() { }
 }
 
