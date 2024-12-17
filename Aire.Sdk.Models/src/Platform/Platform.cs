@@ -6,20 +6,19 @@
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Newtonsoft.Json;
 
-namespace Aire.Sdk.Models.Platform
+namespace Aire.Sdk.Models.Platform;
+
+public class Platform
 {
-    public class Platform
-    {
-        [JsonProperty("name", Required = Required.Always)]
-        [OpenApiProperty(Description = "Name of the platform")]
-        public string? Name { get; set; }
+    [JsonProperty("name", Required = Required.Always)]
+    [OpenApiProperty(Description = "Name of the platform")]
+    public string? Name { get; set; }
 
-        [JsonProperty("modules", Required = Required.Always)]
-        [OpenApiProperty(Description = "Dictionary of the service's core modules")]
-        public Dictionary<ModuleType, Module>? Modules { get; set; }
+    [JsonProperty("modules", Required = Required.Always)]
+    [OpenApiProperty(Description = "Dictionary of the service's core modules")]
+    public Dictionary<ModuleType, Module>? Modules { get; set; }
 
-        [JsonProperty("settings")]
-        [OpenApiProperty(Description = "Settings of the AIRe instance")]
-        public InstanceSettings? Settings { get; set; }
-    }
+    [JsonProperty("settings")]
+    [OpenApiProperty(Description = "General instance settings, public to all clients")]
+    public InstanceSettings? Settings { get; set; }
 }

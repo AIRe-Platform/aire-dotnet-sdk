@@ -6,28 +6,27 @@
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Newtonsoft.Json;
 
-namespace Aire.Sdk.Models.Platform
+namespace Aire.Sdk.Models.Platform;
+
+public class Service
 {
-    public class Service
-    {
-        [JsonProperty("id")]
-        [OpenApiProperty(Description = "Service identifier")]
-        public string? Id { get; set; }
+    [JsonProperty("id")]
+    [OpenApiProperty(Description = "Service identifier")]
+    public string? Id { get; set; }
 
-        [JsonProperty("name")]
-        [OpenApiProperty(Description = "Name of the service")]
-        public string? Name { get; set; }
+    [JsonProperty("name")]
+    [OpenApiProperty(Description = "Name of the service")]
+    public string? Name { get; set; }
 
-        [JsonProperty("owner")]
-        [OpenApiProperty(Description = "Resource owner's UUID")]
-        public string? Owner { get; set; }
+    [JsonProperty("owner")]
+    [OpenApiProperty(Description = "Resource owner's UUID")]
+    public string? Owner { get; set; }
 
-        [JsonProperty("modules")]
-        [OpenApiProperty(Description = "List of available service modules")]
-        public List<Module>? Modules { get; set; }
+    [JsonProperty("modules")]
+    [OpenApiProperty(Description = "List of available service modules")]
+    public List<Module>? Modules { get; set; }
 
-        [JsonProperty("active")]
-        [OpenApiProperty(Description = "Is the service enabled")]
-        public bool? Active { get; set; }
-    }
+    [JsonProperty("active")]
+    [OpenApiProperty(Description = "Is the service enabled")]
+    public bool? Active { get; set; }
 }
