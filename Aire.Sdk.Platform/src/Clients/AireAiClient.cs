@@ -3,11 +3,15 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System.Net.Http.Headers;
 using Aire.Sdk.AspNetCore;
 using Aire.Sdk.Models.Platform;
 using Aire.Sdk.Models.Resources;
 using Aire.Sdk.Platform.Clients.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+
+using QueryString = Aire.Sdk.AspNetCore.QueryString;
 
 namespace Aire.Sdk.Platform.Clients;
 
@@ -51,7 +55,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         await LogIfErrorResponse(response, _log);
         return default;
     }
-    
+
     public async Task<bool> DeleteQuestionnaireEmbedding(string id)
     {
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/questionnaire/{id}");
@@ -91,10 +95,49 @@ public class AireAiClient : AireClientBase, IAireAiClient
         await LogIfErrorResponse(response, _log);
         return default;
     }
-    
+
     public async Task<bool> DeleteContentEmbedding(string id)
     {
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/content/{id}");
+        var response = await _httpClient.SendAsync(req);
+
+        await LogIfErrorResponse(response, _log);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<EmbeddingResponse?> CreateDocumentEmbedding(IFormFile file, DocumentMetadata metadata)
+    {
+        var content = new MultipartFormDataContent
+        {
+            {
+                new StreamContent(file.OpenReadStream()) {
+                    Headers = {
+                        ContentLength = file.Length,
+                        ContentType = new MediaTypeHeaderValue(file.ContentType),
+                    }
+                }, "document", file.FileName
+            },
+            {
+                new JsonContent<DocumentMetadata>(metadata), "metadata"
+            }
+        };
+
+        var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/document")
+        {
+            Content = content
+        };
+        var response = await _httpClient.SendAsync(req);
+
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<EmbeddingResponse>();
+
+        await LogIfErrorResponse(response, _log);
+        return default;
+    }
+
+    public async Task<bool> DeleteDocumentEmbedding(string id)
+    {
+        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/document/{id}");
         var response = await _httpClient.SendAsync(req);
 
         await LogIfErrorResponse(response, _log);

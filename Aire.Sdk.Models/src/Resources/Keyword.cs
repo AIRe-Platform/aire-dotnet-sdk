@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Aire.Sdk.Models.Resources;
 
 public class Translation
-{ 
+{
     [JsonProperty("value")]
     public string? Value { get; set; }
 
@@ -29,4 +29,7 @@ public class Keyword
 
     [JsonProperty("prompt")]
     public string? Prompt { get; set; }
+
+    [JsonProperty("documents")]
+    public List<string>? Documents { get; set; }
 }
