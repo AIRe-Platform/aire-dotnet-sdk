@@ -142,7 +142,6 @@ namespace Aire.Sdk.Auth
             PasswordChange,
             Keywords,
             Statistics,
-            AdminAccounts,
             AdminInstanceSettings,
             ExperimentalCustomPrompt
         );
