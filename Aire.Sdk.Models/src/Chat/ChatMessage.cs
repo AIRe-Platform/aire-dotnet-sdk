@@ -21,7 +21,7 @@ namespace Aire.Sdk.Models.Chat
 
         [JsonProperty("timestamp")]
         [OpenApiProperty(Description = "The message timestamp in Unix time")]
-        public long Timestamp { get; set; }
+        public long Timestamp { get; set; }
 
         [JsonProperty("content")]
         [OpenApiProperty(Description = "Message content")]
@@ -46,5 +46,9 @@ namespace Aire.Sdk.Models.Chat
         [JsonProperty("reminder")]
         [OpenApiProperty(Description = "Reminder associated with the message")]
         public Reminder? Reminder { get; set; }
+
+        [JsonProperty("theme")]
+        [OpenApiProperty(Description = "Message theme")]
+        public string? Theme { get; set; }
     }
 }
