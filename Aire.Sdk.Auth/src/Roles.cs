@@ -13,9 +13,9 @@ namespace Aire.Sdk.Auth
         public const string DemoAdmin = "demo-admin";
         public const string DemoUser = "demo-user";
 
-        public const string ProductOwner = "product-owner";
+        public const string KeyUser = "key-user";
 
-        public static readonly AireRoles All = [User, Admin, DemoAdmin, DemoUser, ProductOwner];
+        public static readonly AireRoles All = [User, Admin, DemoAdmin, DemoUser, KeyUser];
 
         public AireRoles() : base() {}
         public AireRoles(params string[] roles) : base(roles) {}

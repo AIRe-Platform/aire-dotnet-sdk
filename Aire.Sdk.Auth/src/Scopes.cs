@@ -128,7 +128,7 @@ namespace Aire.Sdk.Auth
             WriteStatistics
         );
 
-        public static readonly AireScopes ProductOwnerScopes = new(
+        public static readonly AireScopes KeyUserScopes = new(
             Profile,
             ChatHistory,
             ChatBot,
@@ -142,6 +142,7 @@ namespace Aire.Sdk.Auth
             PasswordChange,
             Keywords,
             Statistics,
+            AdminAccounts,
             AdminInstanceSettings,
             ExperimentalCustomPrompt
         );
@@ -171,7 +172,7 @@ namespace Aire.Sdk.Auth
             { AireRoles.Admin, AdminScopes },
             { AireRoles.DemoAdmin, DemoAdminScopes },
             { AireRoles.DemoUser, DemoUserScopes },
-            { AireRoles.ProductOwner, ProductOwnerScopes }
+            { AireRoles.KeyUser, KeyUserScopes }
         };
 
         public static readonly Dictionary<string, AireScopes> ScopeAliasDict = new() {
