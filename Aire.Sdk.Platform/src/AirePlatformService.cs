@@ -45,15 +45,15 @@ public class AirePlatformService : IAirePlatformService
             _httpClient.DefaultRequestHeaders.Add(AirePlaformConstants.AireServiceKeyHeader, _options.ServiceKey);
     }
 
-    public async Task<PlatformConfiguration> GetPlatformConfiguration()
+    public async Task<PlatformConfiguration> GetPlatformConfiguration(string id)
     {
         if (string.IsNullOrEmpty(_options.ServiceKey))
-            return await GetPublicPlatformConfiguration();
+            return await GetPublicPlatformConfiguration(id);
         else
-            return await GetInternalPlatformConfiguration();
+            return await GetInternalPlatformConfiguration(id);
     }
 
-    public async Task<PlatformConfiguration> GetInternalPlatformConfiguration()
+    public async Task<PlatformConfiguration> GetInternalPlatformConfiguration(string id)
     {
         if (string.IsNullOrEmpty(_options.ServiceKey))
         {
@@ -63,7 +63,7 @@ public class AirePlatformService : IAirePlatformService
 
         if (!_cache.TryGetValue(InternalConfigCacheKey, out PlatformConfiguration? config))
         {
-            var response = await _httpClient.GetAsync("v1/config/internal");
+            var response = await _httpClient.GetAsync($"v1/config/{id}/internal");
             if (response.IsSuccessStatusCode)
             {
                 config = await response.ReadJsonResponse<PlatformConfiguration>();
@@ -82,11 +82,11 @@ public class AirePlatformService : IAirePlatformService
         return config;
     }
 
-    public async Task<PlatformConfiguration> GetPublicPlatformConfiguration()
+    public async Task<PlatformConfiguration> GetPublicPlatformConfiguration(string id)
     {
         if (!_cache.TryGetValue(PublicConfigCacheKey, out PlatformConfiguration? config))
         {
-            var response = await _httpClient.GetAsync("v1/config");
+            var response = await _httpClient.GetAsync($"v1/config/{id}/public");
             if (response.IsSuccessStatusCode)
             {
                 config = await response.ReadJsonResponse<PlatformConfiguration>();
