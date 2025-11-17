@@ -16,9 +16,5 @@ public class Platform
 
     [JsonProperty("modules", Required = Required.Always)]
     [OpenApiProperty(Description = "Dictionary of the service's core modules")]
-    public Dictionary<ModuleType, Module>? Modules { get; set; }
-
-    [JsonProperty("settings")]
-    [OpenApiProperty(Description = "General instance settings, public to all clients")]
-    public InstanceSettings? Settings { get; set; }
+    public Dictionary<ModuleType, List<Module>>? Modules { get; set; }
 }

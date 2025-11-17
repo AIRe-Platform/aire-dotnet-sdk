@@ -17,4 +17,12 @@ public class PlatformConfiguration
     [JsonProperty("services", Required = Required.Always)]
     [OpenApiProperty(Description = "Available third-party services on the platform")]
     public List<Service>? Services { get; set; }
+
+    [JsonProperty("settings")]
+    [OpenApiProperty(Description = "General instance settings, public to all clients")]
+    public InstanceSettings? Settings { get; set; }
+
+    [JsonProperty("agents", Required = Required.Always)]
+    [OpenApiProperty(Description = "Available agents on the platform")]
+    public List<AgentConfig>? Agents { get; set; }
 }

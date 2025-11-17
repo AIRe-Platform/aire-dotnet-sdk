@@ -44,6 +44,10 @@ public enum ModuleAccess
 
 public class Module
 {
+    [JsonProperty("id")]
+    [OpenApiProperty(Description = "Module identifier")]
+    public string? Id { get; set; }
+
     [JsonProperty("type", Required = Required.Always)]
     [OpenApiProperty(Description = "Type of the module")]
     public ModuleType Type { get; set; }
@@ -68,4 +72,9 @@ public class Module
     [JsonProperty("settings", NullValueHandling = NullValueHandling.Ignore)]
     [OpenApiProperty(Description = "Module settings, internal")]
     public Dictionary<string, dynamic>? Settings { get; set; }
+}
+
+public static class ModuleSettings
+{
+    public const string Memory_VectorDbName = "vector_database_name";
 }
