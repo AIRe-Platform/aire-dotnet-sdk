@@ -77,4 +77,5 @@ public class Module
 public static class ModuleSettings
 {
     public const string Memory_VectorDbName = "vector_database_name";
+    public const string AI_PersonalityPrompt = "personality_prompt";
 }

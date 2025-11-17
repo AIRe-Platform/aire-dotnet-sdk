@@ -68,6 +68,7 @@ namespace Aire.Sdk.Auth
         public const string AdminConfig = "admin-config";
         public const string AdminAgents = "admin-agents";
         public const string AdminInstanceSettings = "admin-instance-settings";
+        public const string AdminModuleSettings = "admin-module-settings";
 
         public const string Auth = "auth";
         public const string AireHub = "aire-hub";
@@ -95,6 +96,7 @@ namespace Aire.Sdk.Auth
             AdminConfig,
             AdminAgents,
             AdminInstanceSettings,
+            AdminModuleSettings,
             ExperimentalCustomPrompt
         );
 
