@@ -3,16 +3,15 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-namespace Aire.Sdk.Azure
-{
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	public class EntityTableAttribute : Attribute
-	{
-		public string TableName { get; private set; }
+namespace Aire.Sdk.Azure;
 
-		public EntityTableAttribute(string tableName)
-		{
-			TableName = tableName;
-		}
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+public class EntityTableAttribute : Attribute
+{
+	public string TableName { get; private set; }
+
+	public EntityTableAttribute(string tableName)
+	{
+		TableName = tableName;
 	}
 }
