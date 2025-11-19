@@ -11,51 +11,18 @@ using Newtonsoft.Json;
 namespace Aire.Sdk.Models;
 
 /// <summary>
-/// Dictionary with string key and nullable object values
-/// </summary>
-public class ObjectDictionary : Dictionary<string, object?>
-{
-    public ObjectDictionary() : base() { }
-
-    public T? GetTyped<T>(string key) where T : class, new()
-    {
-        try
-        {
-            var obj = this[key];
-            if (obj != null && obj is T)
-                return obj as T;
-        }
-        catch (Exception) { }
-
-        return null;
-    }
-}
-
-/// <summary>
 /// Contains all user data in Memory service module
 /// </summary>
-public class GDPRMemoryDataCollection : ObjectDictionary
+public class GDPRMemoryDataCollection
 {
     [JsonProperty("chats")]
-    public List<ChatLogMetadata>? Chats
-    {
-        get => GetTyped<List<ChatLogMetadata>>("chats");
-        set => this["chats"] = value;
-    }
+    public List<ChatLogMetadata>? Chats { get; set; }
 
     [JsonProperty("chatlogs")]
-    public Dictionary<string, ChatLog>? Chatlogs
-    {
-        get => GetTyped<Dictionary<string, ChatLog>>("chatlogs");
-        set => this["chatlogs"] = value;
-    }
+    public Dictionary<string, ChatLog>? Chatlogs { get; set; }
 
     [JsonProperty("questionnaires")]
-    public List<QuestionnaireResults>? Questionnaires
-    {
-        get => GetTyped<List<QuestionnaireResults>>("questionnaires");
-        set => this["questionnaires"] = value;
-    }
+    public List<QuestionnaireResults>? Questionnaires { get; set; }
 }
 
 /// <summary>
