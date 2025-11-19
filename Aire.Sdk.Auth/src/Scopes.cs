@@ -177,28 +177,28 @@ public class AireScopes : List<string>
     );
 
     public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
-            { AireRoles.User, UserScopes },
-            { AireRoles.Admin, AdminScopes },
-            { AireRoles.DemoAdmin, DemoAdminScopes },
-            { AireRoles.DemoUser, DemoUserScopes },
-            { AireRoles.KeyUser, KeyUserScopes }
-        };
+        { AireRoles.User, UserScopes },
+        { AireRoles.Admin, AdminScopes },
+        { AireRoles.DemoAdmin, DemoAdminScopes },
+        { AireRoles.DemoUser, DemoUserScopes },
+        { AireRoles.KeyUser, KeyUserScopes }
+    };
 
     public static readonly Dictionary<string, AireScopes> ScopeAliasDict = new() {
-            { "admin", AdminScopes },
-            { "chat", ChatBot },
-            { "chat-history", ChatHistory },
-            { "content", Content },
-            { "demo-admin", DemoAdminScopes },
-            { "demo-groups", DemoGroups },
-            { "document", Document },
-            { "reminders", Reminders },
-            { "keywords", Keywords },
-            { "profile", Profile },
-            { "questionnaire", Questionnaire },
-            { "services", Services },
-            { "statistics", Statistics }
-        };
+        { "admin", AdminScopes },
+        { "chat", ChatBot },
+        { "chat-history", ChatHistory },
+        { "content", Content },
+        { "demo-admin", DemoAdminScopes },
+        { "demo-groups", DemoGroups },
+        { "document", Document },
+        { "reminders", Reminders },
+        { "keywords", Keywords },
+        { "profile", Profile },
+        { "questionnaire", Questionnaire },
+        { "services", Services },
+        { "statistics", Statistics }
+    };
 
     public AireScopes() : base() { }
     public AireScopes(params dynamic[] collection) : base()
