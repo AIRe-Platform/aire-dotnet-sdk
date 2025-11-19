@@ -59,13 +59,13 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<GDPRDataCollection?> GetUserData()
+    public async Task<GDPRMemoryDataCollection?> GetUserData()
     {
         var req = new HttpRequestMessage(HttpMethod.Get, "v1/user-data");
         var response = await _httpClient.SendAsync(req);
         
         if (response.IsSuccessStatusCode)
-            return await response.ReadJsonResponse<GDPRDataCollection>();
+            return await response.ReadJsonResponse<GDPRMemoryDataCollection>();
 
         await LogIfErrorResponse(response, _log);
         return default;

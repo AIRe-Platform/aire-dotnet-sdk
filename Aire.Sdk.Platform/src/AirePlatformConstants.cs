@@ -3,7 +3,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-
 namespace Aire.Sdk.Platform;
 
 public static class AirePlaformConstants

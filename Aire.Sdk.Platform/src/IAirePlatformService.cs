@@ -10,42 +10,54 @@ namespace Aire.Sdk.Platform;
 public interface IAirePlatformService
 {
     /// <summary>
+    /// Request a list of platform configuration.
+    /// </summary>
+    /// <returns>Platform configuration list</returns>
+    public abstract Task<Dictionary<string, PlatformConfiguration>> GetPlatformConfigurations();
+    
+    /// <summary>
     /// Request platform configuration. Returns internal configuration if service key is configured.
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <returns>Platform configuration object</returns>
-    public abstract Task<PlatformConfiguration> GetPlatformConfiguration();
+    public abstract Task<PlatformConfiguration> GetPlatformConfiguration(string platformId);
 
     /// <summary>
     /// Request public platform configuration
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <returns>Platform configuration object</returns>
-    public abstract Task<PlatformConfiguration> GetPublicPlatformConfiguration();
+    public abstract Task<PlatformConfiguration> GetPublicPlatformConfiguration(string platformId);
 
     /// <summary>
     /// Request internal platform configuration
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <returns>Platform configuration object</returns>
-    public abstract Task<PlatformConfiguration> GetInternalPlatformConfiguration();
+    public abstract Task<PlatformConfiguration> GetInternalPlatformConfiguration(string platformId);
 
     /// <summary>
     /// Try finding a named module of certain type
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <param name="moduleType">Module type</param>
-    /// <param name="serviceNameOrId">Module name or identifier</param>
+    /// <param name="serviceId">Module identifier</param>
     /// <returns>Module object if found, otherwise null</returns>
-    public abstract Task<Module?> GetServiceModule(ModuleType moduleType, string serviceNameOrId);
+    public abstract Task<Module?> GetServiceModule(string platformId, ModuleType moduleType, string serviceId);
 
     /// <summary>
     /// List available modules of certain type
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <param name="moduleType">Module type</param>
     /// <returns>List of modules</returns>
-    public abstract Task<List<Module>> GetAvailableModulesOfType(ModuleType moduleType);
+    public abstract Task<List<Module>> GetAvailableModulesOfType(string platformId, ModuleType moduleType);
 
     /// <summary>
     /// Returns platform's default module of certain type.
     /// </summary>
+    /// <param name="platformId">Platform identifier</param>
     /// <param name="moduleType">Module type</param>
     /// <returns>Module object if configured, otherwise null</returns>
-    public abstract Task<Module?> GetDefaultModuleOfType(ModuleType moduleType);
+    public abstract Task<Module?> GetDefaultModuleOfType(string platformId, ModuleType moduleType);
 }

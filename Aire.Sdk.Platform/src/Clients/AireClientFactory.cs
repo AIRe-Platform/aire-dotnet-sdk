@@ -3,7 +3,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-
 using Aire.Sdk.Models.Platform;
 using Microsoft.Extensions.Logging;
 
@@ -28,9 +27,9 @@ public class AireClientFactory : IAireClientFactory
         _loggerFactory = loggerFactory;
     }
 
-    public async Task<IAireAiClient?> CreateAiClient(string? accessToken = null, string? serviceName = null)
+    public async Task<IAireAiClient?> CreateAiClient(string platformId, string? accessToken, string? serviceId)
     {
-        var module = await FindModule(ModuleType.AI, serviceName);
+        var module = await FindModule(platformId, ModuleType.AI, serviceId);
         if(module == null)
             return null;
 
@@ -39,9 +38,9 @@ public class AireClientFactory : IAireClientFactory
             _loggerFactory.CreateLogger<AireAiClient>());
     }
 
-    public async Task<IAireMemoryClient?> CreateMemoryClient(string? accessToken = null, string? serviceName = null)
+    public async Task<IAireMemoryClient?> CreateMemoryClient(string platformId, string? accessToken, string? serviceId)
     {        
-        var module = await FindModule(ModuleType.Memory, serviceName);
+        var module = await FindModule(platformId, ModuleType.Memory, serviceId);
         if(module == null)
             return null;
 
@@ -51,16 +50,16 @@ public class AireClientFactory : IAireClientFactory
         throw new NotImplementedException();
     }
 
-    private async Task<Module?> FindModule(ModuleType type, string? serviceName)
+    private async Task<Module?> FindModule(string platformId, ModuleType type, string? serviceId)
     {
-        Module? module = null;
-        if(serviceName != null)
-            module = await _platform.GetServiceModule(type, serviceName);
+        Module? module;
+        if (serviceId != null)
+            module = await _platform.GetServiceModule(platformId, type, serviceId);
         else
-            module = await _platform.GetDefaultModuleOfType(type);
+            module = await _platform.GetDefaultModuleOfType(platformId, type);
 
         if(module == null)
-            _log.LogCritical($"Failed to find {type} module '{serviceName ?? "default"}'");
+            _log.LogCritical($"Failed to find {type} module '{serviceId ?? "default"}'");
 
         return module;
     }

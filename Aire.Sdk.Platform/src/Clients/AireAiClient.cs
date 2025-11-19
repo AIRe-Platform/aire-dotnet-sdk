@@ -25,12 +25,12 @@ public class AireAiClient : AireClientBase, IAireAiClient
         _log = log;
     }
 
-    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(IEnumerable<string> keywords)
+    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords)
     {
         var query = new Dictionary<string, string?> {
             { "query", string.Join(",", keywords ) }
         };
-        string path = "embeddings/questionnaire" + QueryString.FromDictionary(query);
+        string path = $"embeddings/{database}/questionnaire" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
         var response = await _httpClient.SendAsync(req);
 
@@ -41,9 +41,9 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<EmbeddingResponse?> CreateQuestionnaireEmbedding(Questionnaire questionnaire)
+    public async Task<EmbeddingResponse?> CreateQuestionnaireEmbedding(string database, Questionnaire questionnaire)
     {
-        var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/questionnaire")
+        var req = new HttpRequestMessage(HttpMethod.Post, $"embeddings/{database}/questionnaire")
         {
             Content = new JsonContent<Questionnaire>(questionnaire)
         };
@@ -56,21 +56,21 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<bool> DeleteQuestionnaireEmbedding(string id)
+    public async Task<bool> DeleteQuestionnaireEmbedding(string database, string id)
     {
-        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/questionnaire/{id}");
+        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/questionnaire/{id}");
         var response = await _httpClient.SendAsync(req);
 
         await LogIfErrorResponse(response, _log);
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<ContentQueryResponse?> SearchContent(string search)
+    public async Task<ContentQueryResponse?> SearchContent(string database, string search)
     {
         var query = new Dictionary<string, string?> {
             { "query", search }
         };
-        string path = "embeddings/content" + QueryString.FromDictionary(query);
+        string path = $"embeddings/{database}/content" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
         var response = await _httpClient.SendAsync(req);
 
@@ -81,9 +81,9 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<EmbeddingResponse?> CreateContentEmbedding(Content content)
+    public async Task<EmbeddingResponse?> CreateContentEmbedding(string database, Content content)
     {
-        var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/content")
+        var req = new HttpRequestMessage(HttpMethod.Post, $"embeddings/{database}/content")
         {
             Content = new JsonContent<Content>(content)
         };
@@ -96,16 +96,16 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<bool> DeleteContentEmbedding(string id)
+    public async Task<bool> DeleteContentEmbedding(string database, string id)
     {
-        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/content/{id}");
+        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/content/{id}");
         var response = await _httpClient.SendAsync(req);
 
         await LogIfErrorResponse(response, _log);
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<EmbeddingResponse?> CreateDocumentEmbedding(IFormFile file, DocumentMetadata metadata)
+    public async Task<EmbeddingResponse?> CreateDocumentEmbedding(string database, IFormFile file, DocumentMetadata metadata)
     {
         var content = new MultipartFormDataContent
         {
@@ -122,7 +122,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
             }
         };
 
-        var req = new HttpRequestMessage(HttpMethod.Post, "embeddings/document")
+        var req = new HttpRequestMessage(HttpMethod.Post, $"embeddings/{database}/document")
         {
             Content = content
         };
@@ -135,9 +135,9 @@ public class AireAiClient : AireClientBase, IAireAiClient
         return default;
     }
 
-    public async Task<bool> DeleteDocumentEmbedding(string id)
+    public async Task<bool> DeleteDocumentEmbedding(string database, string id)
     {
-        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/document/{id}");
+        var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/document/{id}");
         var response = await _httpClient.SendAsync(req);
 
         await LogIfErrorResponse(response, _log);

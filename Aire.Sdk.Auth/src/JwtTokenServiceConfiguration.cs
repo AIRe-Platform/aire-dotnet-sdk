@@ -3,13 +3,12 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-namespace Aire.Sdk.Auth
+namespace Aire.Sdk.Auth;
+
+public class JwtTokenServiceConfiguration
 {
-    public class JwtTokenServiceConfiguration
-    {
-        public string? SigningKey { get; set; }
-        public string? EncryptionKey { get; set; }
-        public string? Audience { get; set; }
-        public string? Issuer { get; set; } 
-    }
+    public string? SigningKey { get; set; }
+    public string? EncryptionKey { get; set; }
+    public string? Audience { get; set; }
+    public string? Issuer { get; set; }
 }

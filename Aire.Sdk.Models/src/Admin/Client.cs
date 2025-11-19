@@ -35,4 +35,10 @@ public class Client
 
     [JsonProperty("grant_types")]
     public List<string>? GrantTypes { get; set; }
+
+    [JsonProperty("require_platform")]
+    public bool RequirePlatform { get; set; }
+
+    [JsonProperty("platforms")]
+    public List<string>? Platforms { get; set; }
 }

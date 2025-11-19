@@ -11,17 +11,31 @@ using Newtonsoft.Json;
 namespace Aire.Sdk.Models;
 
 /// <summary>
-/// Object containing all user data gathered by the service
+/// Dictionary with string key and nullable object values
 /// </summary>
-public class GDPRDataCollection : Dictionary<string, object?>
+public class ObjectDictionary : Dictionary<string, object?>
 {
-    [JsonProperty("profile")]
-    public User? Profile
-    {
-        get => GetTyped<User>("profile");
-        set => this["profile"] = value;
-    }
+    public ObjectDictionary() : base() { }
 
+    public T? GetTyped<T>(string key) where T : class, new()
+    {
+        try
+        {
+            var obj = this[key];
+            if (obj != null && obj is T)
+                return obj as T;
+        }
+        catch (Exception) { }
+
+        return null;
+    }
+}
+
+/// <summary>
+/// Contains all user data in Memory service module
+/// </summary>
+public class GDPRMemoryDataCollection : ObjectDictionary
+{
     [JsonProperty("chats")]
     public List<ChatLogMetadata>? Chats
     {
@@ -42,17 +56,16 @@ public class GDPRDataCollection : Dictionary<string, object?>
         get => GetTyped<List<QuestionnaireResults>>("questionnaires");
         set => this["questionnaires"] = value;
     }
+}
 
-    public T? GetTyped<T>(string key) where T : class, new()
-    {
-        try
-        {
-            var obj = this[key];
-            if (obj != null && obj is T)
-                return obj as T;
-        }
-        catch (Exception) { }
+/// <summary>
+/// Object containing all user data gathered by the service
+/// </summary>
+public class GDPRDataCollection
+{
+    [JsonProperty("profile")]
+    public User? Profile { get; set; }
 
-        return null;
-    }
+    [JsonProperty("memory")]
+    public Dictionary<string, GDPRMemoryDataCollection>? Memory { get; set; } = [];
 }

@@ -34,5 +34,5 @@ public interface IAireMemoryClient
     /// Request all data containing personally identifiable information of the current user
     /// </summary>
     /// <returns>Data collection object</returns>
-    public abstract Task<GDPRDataCollection?> GetUserData();
+    public abstract Task<GDPRMemoryDataCollection?> GetUserData();
 }

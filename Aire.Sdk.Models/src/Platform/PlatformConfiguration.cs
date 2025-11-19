@@ -25,4 +25,16 @@ public class PlatformConfiguration
     [JsonProperty("agents", Required = Required.Always)]
     [OpenApiProperty(Description = "Available agents on the platform")]
     public List<AgentConfig>? Agents { get; set; }
+
+    public List<Module> GetModules(ModuleType moduleType, bool includeThirdParty)
+    {
+        List<Module> modules = Platform?.Modules?.FirstOrDefault(x => x.Key == moduleType).Value ?? [];
+        if (includeThirdParty)
+        {
+            var thirdParty = Services?.SelectMany(x => x.Modules ?? []).Where(x => x.Type == moduleType).ToList();
+            modules.AddRange(thirdParty ?? []);
+        }
+        return modules;
+    }
+
 }

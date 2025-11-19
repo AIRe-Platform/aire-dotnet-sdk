@@ -7,25 +7,18 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Aire.Sdk.Auth
-{
-    public class JwtAuthFeature
-    {
-        public ClaimsPrincipal Principal { get; set; }
-        public JwtSecurityToken Token { get; set; }
-        public string UserId { get; set; }
-        public string UserKey { get; set; }
-        public string JwtEncodedToken { get; set; }
-        public bool VerifiedAccount { get; set; }
+namespace Aire.Sdk.Auth;
 
-        public JwtAuthFeature(ClaimsPrincipal principal, JwtSecurityToken token, string userId, string userKey, string jwt, bool verified)
-        {
-            Principal = principal;
-            Token = token;
-            UserId = userId;
-            UserKey = userKey;
-            JwtEncodedToken = jwt;
-            VerifiedAccount = verified;
-        }
-    }
+public class JwtAuthFeature(
+    ClaimsPrincipal principal, JwtSecurityToken token,
+    string userId, string userKey, string jwt, bool verified, string? platform)
+{
+    public ClaimsPrincipal Principal { get; set; } = principal;
+    public JwtSecurityToken Token { get; set; } = token;
+    public string UserId { get; set; } = userId;
+    public string UserKey { get; set; } = userKey;
+    public string JwtEncodedToken { get; set; } = jwt;
+    public bool VerifiedAccount { get; set; } = verified;
+    public string? Platform { get; set; } = platform;
 }
+
