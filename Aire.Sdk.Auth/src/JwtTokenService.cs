@@ -34,8 +34,7 @@ public class JwtTokenService : IJwtTokenService
 
     public bool CheckAuthorization(JwtAuthFeature? auth, string? requiredScopes = null)
     {
-        var required = requiredScopes?.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        AireScopes? scopes = (required == null) ? null : new AireScopes(required);
+        AireScopes? scopes = (requiredScopes == null) ? null : AireScopes.ParseString(requiredScopes);
         return CheckAuthorization(auth, scopes);
     }
 
@@ -48,7 +47,7 @@ public class JwtTokenService : IJwtTokenService
             var grantedScopes = auth.Principal.Claims.FirstOrDefault(x => x.Type == "scope");
             if (grantedScopes == null)
                 return false;
-            var scopeValues = grantedScopes.Value.Split(" ");
+            var scopeValues = AireScopes.ParseString(grantedScopes.Value);
             foreach (var scope in requiredScopes)
             {
                 if (!scopeValues.Contains(scope))

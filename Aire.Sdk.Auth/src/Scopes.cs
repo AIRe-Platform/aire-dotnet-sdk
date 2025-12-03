@@ -200,18 +200,30 @@ public class AireScopes : List<string>
         { "statistics", Statistics }
     };
 
+    public static AireScopes ParseString(string scopes)
+    {
+        var result = new AireScopes();
+        var arr = scopes.Split(" ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        foreach (var scope in arr)
+        {
+            if (ScopeAliasDict != null && ScopeAliasDict.TryGetValue(scope, out AireScopes? value))
+                result.AddRange(value);
+            else
+                result.Add(scope);
+        }
+        return result;
+    }
+
     public AireScopes() : base() { }
     public AireScopes(params dynamic[] collection) : base()
     {
         foreach (var item in collection)
         {
-            if (item is string)
-                if (ScopeAliasDict != null && ScopeAliasDict.ContainsKey(item))
-                    AddRange(ScopeAliasDict?[item]);
-                else
-                    Add(item);
-            else if (item is AireScopes)
-                AddRange(item);
+            if (item is string str)
+                AddRange(ParseString(str));
+            else if (item is IEnumerable<string> arr)
+                foreach (var scope in arr)
+                    AddRange(ParseString(scope));
             else
                 throw new ArgumentException("Unsupported argument");
         }
