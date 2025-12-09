@@ -9,6 +9,6 @@ namespace Aire.Sdk.Platform.Clients;
 
 public interface IAireClientFactory
 {
-    public Task<IAireAiClient?> CreateAiClient(Module module, string? accessToken);
-    public Task<IAireMemoryClient?> CreateMemoryClient(Module platformId, string? accessToken);
+    public Task<IAireAiClient> CreateAiClient(Module module, string? accessToken);
+    public Task<IAireMemoryClient> CreateMemoryClient(Module module, string? accessToken);
 }

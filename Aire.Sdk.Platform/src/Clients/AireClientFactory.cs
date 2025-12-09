@@ -27,14 +27,14 @@ public class AireClientFactory : IAireClientFactory
         _loggerFactory = loggerFactory;
     }
 
-    public async Task<IAireAiClient?> CreateAiClient(Module module, string? accessToken)
+    public async Task<IAireAiClient> CreateAiClient(Module module, string? accessToken)
     {
         return new AireAiClient(
             _httpClientFactory.CreateClient(), module, accessToken,
             _loggerFactory.CreateLogger<AireAiClient>());
     }
 
-    public async Task<IAireMemoryClient?> CreateMemoryClient(Module module, string? accessToken)
+    public async Task<IAireMemoryClient> CreateMemoryClient(Module module, string? accessToken)
     {        
         return new AireMemoryClient(
             _httpClientFactory.CreateClient(), module, accessToken,
