@@ -131,56 +131,38 @@ public class AirePlatformService : IAirePlatformService
         return config;
     }
 
-    public async Task<Module?> GetServiceModule(string platformId, ModuleType moduleType, string serviceId)
+    public async Task<Module?> GetPlatformModule(string platformId, ModuleType moduleType, string? moduleId)
+    {
+        var platform = await GetPlatformConfiguration(platformId);
+        if (platform.Platform?.Modules?.TryGetValue(moduleType, out var modules) ?? false)
+        {
+            var module = modules.FirstOrDefault(x => moduleId == null || x.Id == moduleId);
+            if (module != null)
+                return module;
+        }
+
+        _log?.LogError($"Could not find module '{moduleId}'");
+        return null;
+    }
+
+    public async Task<Module?> GetExternalServiceModule(string platformId, ModuleType moduleType, string serviceId, string? moduleId)
     {
         var platform = await GetPlatformConfiguration(platformId);
 
-        var svc = platform.Services?.Where(x => x.Name == serviceId).FirstOrDefault();
+        var svc = platform.Services?.Where(x => x.Id == serviceId).FirstOrDefault();
         if (svc == null)
         {
             _log?.LogError($"No service with name '{serviceId}' found");
             return null;
         }
 
-        var module = svc.Modules?.Where(x => x.Type == moduleType).FirstOrDefault();
+        var module = svc.Modules?.Where(x => x.Type == moduleType).FirstOrDefault(x => moduleId == null || x.Id == moduleId);
         if (module == null)
         {
-            _log?.LogError($"The service '{serviceId}' does not have an AI module");
+            _log?.LogError($"The service '{serviceId}' does not have a module of requested type");
             return null;
         }
 
         return module;
-    }
-
-    public async Task<List<Module>> GetAvailableModulesOfType(string platformId, ModuleType moduleType)
-    {
-        var modules = new List<Module>();
-        var platform = await GetPlatformConfiguration(platformId);
-
-        if (platform.Platform?.Modules?.ContainsKey(moduleType) ?? false)
-        {
-            var defaultModules = platform.Platform.Modules[moduleType]
-                .Where(x => x.Type == moduleType)
-                .ToList();
-            modules.AddRange(defaultModules);
-        }
-
-        if (platform.Services != null)
-        {
-            var serviceModules = platform.Services
-                .Where(x => x.Modules != null)
-                .Select(x => x.Modules!.Where(y => y.Type == moduleType))
-                .SelectMany(x => x);
-            modules.AddRange(serviceModules);
-        }
-
-        return modules;
-    }
-
-    public async Task<Module?> GetDefaultModuleOfType(string platformId, ModuleType moduleType)
-    {
-        var platform = await GetPlatformConfiguration(platformId);
-        var modules = platform.Platform?.Modules?.FirstOrDefault(x => x.Key == moduleType);
-        return modules?.Value.FirstOrDefault();
     }
 }

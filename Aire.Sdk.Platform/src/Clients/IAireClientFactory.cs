@@ -3,10 +3,12 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using Aire.Sdk.Models.Platform;
+
 namespace Aire.Sdk.Platform.Clients;
 
 public interface IAireClientFactory
 {
-    public Task<IAireAiClient?> CreateAiClient(string platformId, string? accessToken, string? serviceId);
-    public Task<IAireMemoryClient?> CreateMemoryClient(string platformId, string? accessToken, string? serviceId);
+    public Task<IAireAiClient?> CreateAiClient(Module module, string? accessToken);
+    public Task<IAireMemoryClient?> CreateMemoryClient(Module platformId, string? accessToken);
 }

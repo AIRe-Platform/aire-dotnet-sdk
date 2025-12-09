@@ -37,27 +37,21 @@ public interface IAirePlatformService
     public abstract Task<PlatformConfiguration> GetInternalPlatformConfiguration(string platformId);
 
     /// <summary>
-    /// Try finding a named module of certain type
+    /// Retrieve platform module
+    /// </summary>
+    /// <param name="platformId">Platform identifier</param>
+    /// <param name="moduleType">Module type</param>
+    /// <param name="moduleId">Optional module ID (if null, return first/default)</param>
+    /// <returns>Module object if found, otherwise false</returns>
+    public abstract Task<Module?> GetPlatformModule(string platformId, ModuleType moduleType, string? moduleId);
+
+    /// <summary>
+    /// Retrieve external service module
     /// </summary>
     /// <param name="platformId">Platform identifier</param>
     /// <param name="moduleType">Module type</param>
     /// <param name="serviceId">Module identifier</param>
+    /// <param name="moduleId">Optional module ID (if null, return first/default)</param>
     /// <returns>Module object if found, otherwise null</returns>
-    public abstract Task<Module?> GetServiceModule(string platformId, ModuleType moduleType, string serviceId);
-
-    /// <summary>
-    /// List available modules of certain type
-    /// </summary>
-    /// <param name="platformId">Platform identifier</param>
-    /// <param name="moduleType">Module type</param>
-    /// <returns>List of modules</returns>
-    public abstract Task<List<Module>> GetAvailableModulesOfType(string platformId, ModuleType moduleType);
-
-    /// <summary>
-    /// Returns platform's default module of certain type.
-    /// </summary>
-    /// <param name="platformId">Platform identifier</param>
-    /// <param name="moduleType">Module type</param>
-    /// <returns>Module object if configured, otherwise null</returns>
-    public abstract Task<Module?> GetDefaultModuleOfType(string platformId, ModuleType moduleType);
+    public abstract Task<Module?> GetExternalServiceModule(string platformId, ModuleType moduleType, string serviceId, string? moduleId);
 }

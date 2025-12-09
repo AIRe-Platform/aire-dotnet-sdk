@@ -27,40 +27,18 @@ public class AireClientFactory : IAireClientFactory
         _loggerFactory = loggerFactory;
     }
 
-    public async Task<IAireAiClient?> CreateAiClient(string platformId, string? accessToken, string? serviceId)
+    public async Task<IAireAiClient?> CreateAiClient(Module module, string? accessToken)
     {
-        var module = await FindModule(platformId, ModuleType.AI, serviceId);
-        if(module == null)
-            return null;
-
         return new AireAiClient(
             _httpClientFactory.CreateClient(), module, accessToken,
             _loggerFactory.CreateLogger<AireAiClient>());
     }
 
-    public async Task<IAireMemoryClient?> CreateMemoryClient(string platformId, string? accessToken, string? serviceId)
+    public async Task<IAireMemoryClient?> CreateMemoryClient(Module module, string? accessToken)
     {        
-        var module = await FindModule(platformId, ModuleType.Memory, serviceId);
-        if(module == null)
-            return null;
-
         return new AireMemoryClient(
             _httpClientFactory.CreateClient(), module, accessToken,
             _loggerFactory.CreateLogger<AireMemoryClient>());
         throw new NotImplementedException();
-    }
-
-    private async Task<Module?> FindModule(string platformId, ModuleType type, string? serviceId)
-    {
-        Module? module;
-        if (serviceId != null)
-            module = await _platform.GetServiceModule(platformId, type, serviceId);
-        else
-            module = await _platform.GetDefaultModuleOfType(platformId, type);
-
-        if(module == null)
-            _log.LogCritical($"Failed to find {type} module '{serviceId ?? "default"}'");
-
-        return module;
     }
 }
