@@ -11,8 +11,8 @@ namespace Aire.Sdk.Models.Platform;
 
 public class InstanceSettings
 {
-    [JsonProperty("inactivityDuration")]
-    [Range(5, 720, ErrorMessage = "inactivityDuration must be between 5 and 720 minutes.")]
+    [JsonProperty("inactivity_duration")]
+    [Range(5, 720, ErrorMessage = "inactivity_duration must be between 5 and 720 minutes.")]
     [OpenApiProperty(Description = "The inactivity duration before a user is automatically logged out.")]
     public int? InactivityDuration { get; set; }
 }
