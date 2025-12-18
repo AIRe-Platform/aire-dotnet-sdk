@@ -11,25 +11,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Aire.Sdk.Platform.Clients;
 
-public class AireMemoryClient : AireClientBase, IAireMemoryClient
+public class AireMemoryClient(
+    HttpClient httpclient,
+    Module serviceModule,
+    string? accessToken,
+    string? serviceKey,
+    ILogger<AireMemoryClient> log
+    ) : AireClientBase(httpclient, serviceModule, accessToken, serviceKey), IAireMemoryClient
 {
-    private readonly ILogger<AireMemoryClient> _log;
-
-    public AireMemoryClient(HttpClient httpclient, Module serviceModule, string? accessToken, ILogger<AireMemoryClient> log) 
-        : base(httpclient, serviceModule, accessToken)
-    {
-        _log = log;
-    }
-
     public async Task<List<ChatLogMetadata>?> GetChatHistory()
     {
         var req = new HttpRequestMessage(HttpMethod.Get, "v1/chat-history");
         var response = await _httpClient.SendAsync(req);
-        
+
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<List<ChatLogMetadata>>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -37,11 +35,11 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
     {
         var req = new HttpRequestMessage(HttpMethod.Get, "v1/chat-history/" + id);
         var response = await _httpClient.SendAsync(req);
-        
+
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<ChatLog>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -55,7 +53,7 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
         var req = new HttpRequestMessage(HttpMethod.Delete, path);
         var response = await _httpClient.SendAsync(req);
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return response.IsSuccessStatusCode;
     }
 
@@ -63,11 +61,11 @@ public class AireMemoryClient : AireClientBase, IAireMemoryClient
     {
         var req = new HttpRequestMessage(HttpMethod.Get, "v1/user-data");
         var response = await _httpClient.SendAsync(req);
-        
+
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<GDPRMemoryDataCollection>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 }

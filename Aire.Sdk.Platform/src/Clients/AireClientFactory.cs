@@ -5,40 +5,28 @@
 
 using Aire.Sdk.Models.Platform;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Aire.Sdk.Platform.Clients;
 
-public class AireClientFactory : IAireClientFactory
+public class AireClientFactory(
+    IHttpClientFactory httpClientFactory,
+    ILoggerFactory loggerFactory,
+    IOptions<AirePlatformServiceConfiguration> options) : IAireClientFactory
 {
-    private readonly IHttpClientFactory _httpClientFactory;
-    private readonly IAirePlatformService _platform;
-    private readonly ILogger<AireClientFactory> _log;
-    private readonly ILoggerFactory _loggerFactory;
-
-    public AireClientFactory(
-        IHttpClientFactory httpClientFactory, 
-        IAirePlatformService platform, 
-        ILogger<AireClientFactory> log,
-        ILoggerFactory loggerFactory)
+    public async Task<IAireAiClient> CreateAiClient(Module module, string? accessToken, bool asService)
     {
-        _httpClientFactory = httpClientFactory;
-        _platform = platform;
-        _log = log;
-        _loggerFactory = loggerFactory;
-    }
-
-    public async Task<IAireAiClient> CreateAiClient(Module module, string? accessToken)
-    {
+        string? serviceKey = asService ? options.Value.ServiceKey : null;
         return new AireAiClient(
-            _httpClientFactory.CreateClient(), module, accessToken,
-            _loggerFactory.CreateLogger<AireAiClient>());
+            httpClientFactory.CreateClient(), module, accessToken, serviceKey,
+            loggerFactory.CreateLogger<AireAiClient>());
     }
 
-    public async Task<IAireMemoryClient> CreateMemoryClient(Module module, string? accessToken)
-    {        
+    public async Task<IAireMemoryClient> CreateMemoryClient(Module module, string? accessToken, bool asService)
+    {
+        string? serviceKey = asService ? options.Value.ServiceKey : null;
         return new AireMemoryClient(
-            _httpClientFactory.CreateClient(), module, accessToken,
-            _loggerFactory.CreateLogger<AireMemoryClient>());
-        throw new NotImplementedException();
+            httpClientFactory.CreateClient(), module, accessToken, serviceKey,
+            loggerFactory.CreateLogger<AireMemoryClient>());
     }
 }

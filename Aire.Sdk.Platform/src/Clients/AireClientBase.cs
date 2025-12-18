@@ -13,13 +13,13 @@ public class AireClientBase
 {
     protected readonly HttpClient _httpClient;
 
-    public AireClientBase(HttpClient httpclient, Module serviceModule, string? accessToken)
+    public AireClientBase(HttpClient httpclient, Module serviceModule, string? accessToken, string? serviceKey)
     {
         _httpClient = httpclient;
-        ConfigureModuleClient(serviceModule, accessToken);
+        ConfigureModuleClient(serviceModule, accessToken, serviceKey);
     }
 
-    private void ConfigureModuleClient(Module serviceModule, string? accessToken)
+    private void ConfigureModuleClient(Module serviceModule, string? accessToken, string? serviceKey)
     {
         if (string.IsNullOrEmpty(serviceModule.Endpoint))
             throw new AirePlatformException("Service module endpoint is null or empty");
@@ -32,7 +32,11 @@ public class AireClientBase
         _httpClient.BaseAddress = new Uri(endpoint);
         _httpClient.DefaultRequestHeaders.Clear();
 
-        if (serviceModule.Access == ModuleAccess.Service)
+        if(serviceKey != null)
+        {
+            _httpClient.DefaultRequestHeaders.Add(AirePlaformConstants.AireServiceKeyHeader, serviceKey);
+        }
+        else if (serviceModule.Access == ModuleAccess.Service)
         {
             // Set service credentials if configured
             if (serviceModule.Credentials != null)

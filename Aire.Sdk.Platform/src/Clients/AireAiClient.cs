@@ -15,16 +15,14 @@ using QueryString = Aire.Sdk.AspNetCore.QueryString;
 
 namespace Aire.Sdk.Platform.Clients;
 
-public class AireAiClient : AireClientBase, IAireAiClient
+public class AireAiClient(
+    HttpClient httpclient,
+    Module serviceModule,
+    string? accessToken,
+    string? serviceKey,
+    ILogger<AireAiClient> log
+    ) : AireClientBase(httpclient, serviceModule, accessToken, serviceKey), IAireAiClient
 {
-    private readonly ILogger<AireAiClient> _log;
-
-    public AireAiClient(HttpClient httpclient, Module serviceModule, string? accessToken, ILogger<AireAiClient> log)
-        : base(httpclient, serviceModule, accessToken)
-    {
-        _log = log;
-    }
-
     public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords)
     {
         var query = new Dictionary<string, string?> {
@@ -37,7 +35,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<QuestionnaireQueryResponse>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -52,7 +50,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<EmbeddingResponse>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -61,7 +59,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/questionnaire/{id}");
         var response = await _httpClient.SendAsync(req);
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return response.IsSuccessStatusCode;
     }
 
@@ -77,7 +75,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<ContentQueryResponse>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -92,7 +90,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<EmbeddingResponse>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -101,7 +99,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/content/{id}");
         var response = await _httpClient.SendAsync(req);
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return response.IsSuccessStatusCode;
     }
 
@@ -131,7 +129,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         if (response.IsSuccessStatusCode)
             return await response.ReadJsonResponse<EmbeddingResponse>();
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return default;
     }
 
@@ -140,7 +138,7 @@ public class AireAiClient : AireClientBase, IAireAiClient
         var req = new HttpRequestMessage(HttpMethod.Delete, $"embeddings/{database}/document/{id}");
         var response = await _httpClient.SendAsync(req);
 
-        await LogIfErrorResponse(response, _log);
+        await LogIfErrorResponse(response, log);
         return response.IsSuccessStatusCode;
     }
 }
