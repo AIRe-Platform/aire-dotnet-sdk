@@ -50,5 +50,9 @@ namespace Aire.Sdk.Models.Chat
         [JsonProperty("theme")]
         [OpenApiProperty(Description = "Message theme")]
         public string? Theme { get; set; }
+
+        [JsonProperty("agent")]
+        [OpenApiProperty(Description = "Assistant name")]
+        public string? Agent { get; set; }
     }
 }
