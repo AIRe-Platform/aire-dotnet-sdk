@@ -37,6 +37,10 @@ public class AgentConfig
     [OpenApiProperty(Description = "Agent name")]
     public string? Name { get; set; }
 
+    [JsonProperty("labels")]
+    [OpenApiProperty(Description = "Localized name labels")]
+    public Dictionary<string, string>? Labels { get; set; }
+
     [JsonProperty("description")]
     [OpenApiProperty(Description = "Description of the agent's purpose")]
     public string? Description { get; set; }
