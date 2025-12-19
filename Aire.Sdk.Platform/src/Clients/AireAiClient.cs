@@ -23,10 +23,11 @@ public class AireAiClient(
     ILogger<AireAiClient> log
     ) : AireClientBase(httpclient, serviceModule, accessToken, serviceKey), IAireAiClient
 {
-    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords)
+    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords, float relevance)
     {
         var query = new Dictionary<string, string?> {
-            { "query", string.Join(",", keywords ) }
+            { "query", string.Join(",", keywords ) },
+            { "relevance", relevance.ToString("0.00") }
         };
         string path = $"embeddings/{database}/questionnaire" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
@@ -63,10 +64,11 @@ public class AireAiClient(
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<ContentQueryResponse?> SearchContent(string database, string search)
+    public async Task<ContentQueryResponse?> SearchContent(string database, string search, float relevance)
     {
         var query = new Dictionary<string, string?> {
-            { "query", search }
+            { "query", search },
+            { "relevance", relevance.ToString("0.00") }
         };
         string path = $"embeddings/{database}/content" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
