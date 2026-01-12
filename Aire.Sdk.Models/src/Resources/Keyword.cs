@@ -30,6 +30,6 @@ public class Keyword
     [JsonProperty("prompt")]
     public string? Prompt { get; set; }
 
-    [JsonProperty("document")]
-    public string? Document { get; set; }
+    [JsonProperty("documents")]
+    public List<string>? Documents { get; set; }
 }
