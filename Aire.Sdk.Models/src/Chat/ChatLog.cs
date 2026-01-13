@@ -17,4 +17,7 @@ public class ChatLog
 
     [JsonProperty("stats")]
     public object? Stats { get; set; }
+
+    [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+    public ChatLogMetadata? Metadata { get; set; }
 }

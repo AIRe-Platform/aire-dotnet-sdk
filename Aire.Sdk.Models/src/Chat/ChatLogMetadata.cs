@@ -16,6 +16,6 @@ namespace Aire.Sdk.Models.Chat
 
         [JsonProperty("time", Required = Required.Always)]
         [OpenApiProperty(Description = "The timestamp when the chat log was last modified")]
-        public DateTimeOffset? Time { get; set; }
+        public DateTime? Time { get; set; }
     }
 }
