@@ -32,13 +32,18 @@ public class AireClientBase
         _httpClient.BaseAddress = new Uri(endpoint);
         _httpClient.DefaultRequestHeaders.Clear();
 
-        if(serviceKey != null)
+        // Set service target header
+        _httpClient.DefaultRequestHeaders.Add(AirePlaformConstants.AireServiceTargetHeader, serviceModule.Id);
+
+        // Set authorization header(s)
+        if (serviceKey != null)
         {
+            // Service-to-service with API key
             _httpClient.DefaultRequestHeaders.Add(AirePlaformConstants.AireServiceKeyHeader, serviceKey);
         }
         else if (serviceModule.Access == ModuleAccess.Service)
         {
-            // Set service credentials if configured
+            // Service-to-service with client credentials
             if (serviceModule.Credentials != null)
             {
                 var credentials = serviceModule.Credentials;
@@ -52,7 +57,7 @@ public class AireClientBase
         }
         else // public or private
         {
-            // Set access token if present
+            // Use bearer access token if set (optional for public services)
             if (accessToken != null)
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             else if (serviceModule.Access == ModuleAccess.Private)
