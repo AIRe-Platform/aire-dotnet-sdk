@@ -78,6 +78,7 @@ public static class ModuleSettings
 {
     public const string Memory_VectorDbName = "vector_database_name";
     public const string Memory_VectorSearchRelevanceThreshold = "vector_search_relevance_threshold";
+    public const string Memory_TablePrefix = "table_prefix";
     public const string AI_PersonalityPrompt = "personality_prompt";
     public const string AI_VectorSearchRelevanceThreshold = "vector_search_relevance_threshold";
 }
