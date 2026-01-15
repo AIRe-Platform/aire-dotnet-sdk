@@ -93,5 +93,20 @@ public interface ITableStorageService
     /// <returns>Async pageable</returns>
     Task<AsyncPageable<T>> QueryAsync<T>(string filter)
         where T : class, ITableEntity, new();
+
+    /// <summary>
+    /// Get table client
+    /// </summary>
+    /// <param name="tableName">Table name</param>
+    /// <returns>Table client</returns>
+    Task<TableClient> GetTableClient(string tableName);
+
+    /// <summary>
+    /// Get table client
+    /// </summary>
+    /// <typeparam name="T">Entity class</typeparam>
+    /// <returns>Table client</returns>
+    Task<TableClient> GetTableClient<T>()
+        where T : class, ITableEntity, new();
 }
 
