@@ -69,10 +69,12 @@ public class AireScopes : List<string>
     public const string AdminAgents = "admin-agents";
     public const string AdminInstanceSettings = "admin-instance-settings";
     public const string AdminModuleSettings = "admin-module-settings";
+    public const string AdminInvites = "admin-invites";
 
     public const string Auth = "auth";
     public const string AireHub = "aire-hub";
     public const string PasswordChange = "password-change";
+    public const string TrialAccountUpgrade = "trial-account-upgrade";
 
     public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
     public static readonly AireScopes Experimental = [ExperimentalCustomPrompt];
@@ -97,6 +99,7 @@ public class AireScopes : List<string>
         AdminAgents,
         AdminInstanceSettings,
         AdminModuleSettings,
+        AdminInvites,
         ExperimentalCustomPrompt
     );
 
@@ -176,12 +179,26 @@ public class AireScopes : List<string>
         Experimental
     );
 
+    public static readonly AireScopes TrialUserScopes = new(
+        ChatBot,
+        ReadChatHistory,
+        WriteChatHistory,
+        ReadQuestionnaire,
+        ReadContent,
+        RateContent,
+        ReadDocument,
+        ReadKeywords,
+        WriteStatistics,
+        TrialAccountUpgrade
+    );
+
     public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
         { AireRoles.User, UserScopes },
         { AireRoles.Admin, AdminScopes },
         { AireRoles.DemoAdmin, DemoAdminScopes },
         { AireRoles.DemoUser, DemoUserScopes },
-        { AireRoles.KeyUser, KeyUserScopes }
+        { AireRoles.KeyUser, KeyUserScopes },
+        { AireRoles.TrialUser, TrialUserScopes },
     };
 
     public static readonly Dictionary<string, AireScopes> ScopeAliasDict = new() {
@@ -212,6 +229,11 @@ public class AireScopes : List<string>
                 result.Add(scope);
         }
         return result;
+    }
+
+    public override string ToString()
+    {
+        return string.Join(' ', this);
     }
 
     public AireScopes() : base() { }

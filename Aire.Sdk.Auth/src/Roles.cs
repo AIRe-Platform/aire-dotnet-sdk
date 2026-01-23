@@ -9,13 +9,12 @@ public class AireRoles : List<string>
 {
     public const string User = "user";
     public const string Admin = "admin";
-
     public const string DemoAdmin = "demo-admin";
     public const string DemoUser = "demo-user";
-
     public const string KeyUser = "key-user";
+    public const string TrialUser = "trial-user";
 
-    public static readonly AireRoles All = [User, Admin, DemoAdmin, DemoUser, KeyUser];
+    public static readonly AireRoles All = [User, Admin, DemoAdmin, DemoUser, KeyUser, TrialUser];
 
     public AireRoles() : base() { }
     public AireRoles(params string[] roles) : base(roles) { }
