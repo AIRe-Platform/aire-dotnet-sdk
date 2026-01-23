@@ -24,6 +24,12 @@ public interface IAireMemoryClient
     public abstract Task<ChatLog?> GetChatlog(string id);
 
     /// <summary>
+    /// Create empty chatlog
+    /// </summary>
+    /// <returns>Chatlog metadata</returns>
+    public abstract Task<ChatLogMetadata?> CreateChatlog();
+
+    /// <summary>
     /// Deletes or anonymizes all user data
     /// </summary>
     /// <param name="anonymize">Set to true to anoymize</param>

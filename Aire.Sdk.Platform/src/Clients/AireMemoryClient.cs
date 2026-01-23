@@ -43,6 +43,21 @@ public class AireMemoryClient(
         return default;
     }
 
+    public async Task<ChatLogMetadata?> CreateChatlog()
+    {
+        var req = new HttpRequestMessage(HttpMethod.Post, "v1/chat-history/")
+        {
+            Content = new JsonContent<ChatLog>(new() { Messages = [] })
+        };
+        var response = await _httpClient.SendAsync(req);
+
+        if (response.IsSuccessStatusCode)
+            return await response.ReadJsonResponse<ChatLogMetadata>();
+
+        await LogIfErrorResponse(response, log);
+        return default;
+    }
+
     public async Task<bool> DeleteUserData(bool anonymize)
     {
         var query = new Dictionary<string, string?> {
