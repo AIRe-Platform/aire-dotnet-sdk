@@ -18,14 +18,17 @@ public class InviteCode
     [JsonProperty("client_id")]
     public string? ClientId { get; set; }
 
+    [JsonProperty("created")]
+    public DateTime Created { get; set; }
+
     [JsonProperty("expiry")]
     public DateTime Expiry { get; set; }
 
     [JsonProperty("active")]
     public bool Active { get; set; }
 
-    [JsonProperty("invite_lifespan")]
-    public long InviteLifeSpan { get; set; }
+    [JsonProperty("trial_duration")]
+    public int TrialDuration { get; set; }
 
     [JsonProperty("link")]
     public string? Link { get; set; }

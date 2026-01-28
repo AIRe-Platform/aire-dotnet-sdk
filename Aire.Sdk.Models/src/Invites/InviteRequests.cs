@@ -9,17 +9,14 @@ namespace Aire.Sdk.Models.Invites;
 
 public class InviteCodeCreateRequest
 {
-    [JsonProperty("user_id", Required = Required.Always)]
-    public string? UserId { get; set; }
-
     [JsonProperty("client_id", Required = Required.Always)]
     public string? ClientId { get; set; }
 
     [JsonProperty("valid_days", Required = Required.Always)]
     public int ValidDays { get; set; }
 
-    [JsonProperty("invite_lifespan_days", Required = Required.Always)]
-    public int InviteLifespanDays { get; set; }
+    [JsonProperty("trial_duration", Required = Required.Always)]
+    public int TrialDuration { get; set; }
 
     [JsonProperty("use_limit", Required = Required.Always)]
     public int UseLimit { get; set; }
