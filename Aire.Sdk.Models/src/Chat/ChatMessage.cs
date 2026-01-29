@@ -54,5 +54,9 @@ namespace Aire.Sdk.Models.Chat
         [JsonProperty("agent")]
         [OpenApiProperty(Description = "Assistant name")]
         public string? Agent { get; set; }
+
+        [JsonProperty("localize")]
+        [OpenApiProperty(Description = "The content is a localization key which should be used for showing a localized message")]
+        public bool? Localize { get; set; }
     }
 }
