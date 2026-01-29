@@ -65,10 +65,10 @@ public class JwtTokenService : IJwtTokenService
     {
         var descriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[] {
+            Subject = new ClaimsIdentity([
                     new("sub", subject),
                     new(ClaimTypes.Role, role)
-                }),
+                ]),
             Expires = DateTime.UtcNow + lifetime,
             IssuedAt = DateTime.UtcNow,
             Issuer = _config.Issuer,
