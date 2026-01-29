@@ -3,6 +3,8 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using Aire.Sdk.Models.Admin;
+
 namespace Aire.Sdk.Auth;
 
 public class AireScopes : List<string>
@@ -63,8 +65,16 @@ public class AireScopes : List<string>
     public const string WriteStatistics = "statistics-write";
     public static readonly AireScopes Statistics = [ReadStatistics, WriteStatistics];
 
-    public const string AdminAccounts = "admin-accounts";
-    public const string AdminClients = "admin-clients";
+    public const string ReadClients = "clients-read";
+    public const string CreateClients = "clients-create";
+    public const string EditClients = "clients-edit";
+    public const string DeleteClients = "clients-delete";
+    public static readonly AireScopes Clients = [ReadClients, CreateClients, EditClients, DeleteClients];
+
+    public const string ReadAccounts = "accounts-read";
+    public const string EditAccounts = "accounts-edit";
+    public static readonly AireScopes Accounts = [ReadAccounts, EditAccounts];
+
     public const string AdminConfig = "admin-config";
     public const string AdminAgents = "admin-agents";
     public const string AdminInstanceSettings = "admin-instance-settings";
@@ -93,8 +103,8 @@ public class AireScopes : List<string>
         PasswordChange,
         Keywords,
         Statistics,
-        AdminAccounts,
-        AdminClients,
+        Accounts,
+        Clients,
         AdminConfig,
         AdminAgents,
         AdminInstanceSettings,
@@ -151,7 +161,8 @@ public class AireScopes : List<string>
         PasswordChange,
         Keywords,
         Statistics,
-        AdminAccounts,
+        Accounts,
+        ReadClients,
         AdminAgents,
         AdminInstanceSettings,
         ExperimentalCustomPrompt
@@ -171,8 +182,8 @@ public class AireScopes : List<string>
         PasswordChange,
         Keywords,
         Statistics,
-        AdminAccounts,
-        AdminClients,
+        Accounts,
+        Clients,
         AdminConfig,
         AdminInstanceSettings,
         AdminModuleSettings,
@@ -184,6 +195,7 @@ public class AireScopes : List<string>
         ReadChatHistory,
         WriteChatHistory,
         ReadQuestionnaire,
+        ReadProfile,
         ReadContent,
         RateContent,
         ReadDocument,
@@ -214,7 +226,11 @@ public class AireScopes : List<string>
         { "profile", Profile },
         { "questionnaire", Questionnaire },
         { "services", Services },
-        { "statistics", Statistics }
+        { "statistics", Statistics },
+        { "admin-accounts", Accounts },
+        { "accounts", Accounts },
+        { "admin-clients", Clients },
+        { "clients", Clients },
     };
 
     public static AireScopes ParseString(string scopes)
