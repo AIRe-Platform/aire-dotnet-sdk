@@ -12,6 +12,9 @@ public class InviteCode
     [JsonProperty("code", Required = Required.Always)]
     public Guid? Code { get; set; }
 
+    [JsonProperty("name")]
+    public string? Name { get; set; }
+
     [JsonProperty("user_id")]
     public string? UserId { get; set; }
 

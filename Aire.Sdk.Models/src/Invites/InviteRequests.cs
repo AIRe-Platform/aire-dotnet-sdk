@@ -9,6 +9,9 @@ namespace Aire.Sdk.Models.Invites;
 
 public class InviteCodeCreateRequest
 {
+    [JsonProperty("name", Required = Required.Always)]
+    public string? Name { get; set; }
+
     [JsonProperty("client_id", Required = Required.Always)]
     public string? ClientId { get; set; }
 
