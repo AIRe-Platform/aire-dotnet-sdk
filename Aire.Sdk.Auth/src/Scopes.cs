@@ -169,28 +169,6 @@ public class AireScopes : List<string>
         ExperimentalCustomPrompt
     );
 
-    public static readonly AireScopes AllClientScopes = new(
-        Profile,
-        ChatHistory,
-        Questionnaire,
-        Content,
-        Reminders,
-        Document,
-        ChatBot,
-        DemoGroups,
-        Services,
-        AireHub,
-        PasswordChange,
-        Keywords,
-        Statistics,
-        Accounts,
-        Clients,
-        AdminConfig,
-        AdminInstanceSettings,
-        AdminModuleSettings,
-        Experimental
-    );
-
     public static readonly AireScopes TrialUserScopes = new(
         ChatBot,
         ReadChatHistory,
