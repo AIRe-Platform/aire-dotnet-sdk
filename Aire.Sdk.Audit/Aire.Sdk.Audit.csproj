@@ -1,0 +1,21 @@
+﻿<!-- This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ -->
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Aire.Sdk.Audit</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aire.Sdk.Azure\Aire.Sdk.Azure.csproj" />
+    <ProjectReference Include="..\Aire.Sdk.Helpers\Aire.Sdk.Helpers.csproj" />
+    <ProjectReference Include="..\Aire.Sdk.Models\Aire.Sdk.Models.csproj" />
+  </ItemGroup>
+
+</Project>

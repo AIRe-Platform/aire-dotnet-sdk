@@ -3,8 +3,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-using Aire.Sdk.Models.Admin;
-
 namespace Aire.Sdk.Auth;
 
 public class AireScopes : List<string>
@@ -80,6 +78,7 @@ public class AireScopes : List<string>
     public const string AdminInstanceSettings = "admin-instance-settings";
     public const string AdminModuleSettings = "admin-module-settings";
     public const string AdminInvites = "admin-invites";
+    public const string AdminAudit = "admin-audit";
 
     public const string Auth = "auth";
     public const string AireHub = "aire-hub";
@@ -110,6 +109,7 @@ public class AireScopes : List<string>
         AdminInstanceSettings,
         AdminModuleSettings,
         AdminInvites,
+        AdminAudit,
         ExperimentalCustomPrompt
     );
 
@@ -165,6 +165,7 @@ public class AireScopes : List<string>
         ReadClients,
         AdminAgents,
         AdminInstanceSettings,
+        AdminAudit,
         ExperimentalCustomPrompt
     );
 
