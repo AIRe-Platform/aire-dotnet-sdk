@@ -3,9 +3,12 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using Aire.Sdk.Models.Platform;
+
 namespace Aire.Sdk.Platform;
 
 public interface IAireModuleSettingsService
 {
-    public Task<T?> Get<T>(string platform, string key);
+    public Task<T?> Get<T>(string platform, ModuleType? moduleType, string? moduleId, string key);
+    public Task<T?> GetCurrent<T>(string platform, string key);
 }

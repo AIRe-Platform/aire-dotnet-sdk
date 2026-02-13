@@ -3,6 +3,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using Aire.Sdk.Models.Platform;
 using Microsoft.Extensions.Options;
 
 namespace Aire.Sdk.Platform;
@@ -12,15 +13,15 @@ public class AireModuleSettingsService(
     IOptions<AireModuleConfig> options
 ) : IAireModuleSettingsService
 {
-    public async Task<T?> Get<T>(string platform, string key)
+    public async Task<T?> Get<T>(string platform, ModuleType? moduleType, string? moduleId, string key)
     {
-        var type = options.Value.Type ??
-            throw new AirePlatformException("Module type not configured");
+        moduleType ??= (options.Value.Type ??
+            throw new AirePlatformException("Module type not configured"));
 
-        var id = options.Value.Identifier ??
+        moduleId ??= options.Value.Identifier ??
             throw new AirePlatformException("Module identifier not configured");
 
-        var module = await platformService.GetPlatformModule(platform, type, id);
+        var module = await platformService.GetPlatformModule(platform, moduleType.Value, moduleId);
 
         if (module?.Settings == null)
             return default;
@@ -31,5 +32,16 @@ public class AireModuleSettingsService(
                 return t;
         }
         return default;
+    }
+
+    public async Task<T?> GetCurrent<T>(string platform, string key)
+    {
+        var type = options.Value.Type ??
+            throw new AirePlatformException("Module type not configured");
+
+        var id = options.Value.Identifier ??
+            throw new AirePlatformException("Module identifier not configured");
+
+        return await Get<T>(platform, type, id, key);
     }
 }
