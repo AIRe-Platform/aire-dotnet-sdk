@@ -3,9 +3,31 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Aire.Sdk.Models.Resources;
+
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum DocumentStatus
+{
+    [EnumMember(Value = "unprocessed")]
+    Unprocessed,
+
+    [EnumMember(Value = "queued")]
+    Queued,
+
+    [EnumMember(Value = "processing")]
+    Processing,
+
+    [EnumMember(Value = "processed")]
+    Processed,
+
+    [EnumMember(Value = "failure")]
+    Failure,
+}
 
 public class DocumentMetadata
 {
@@ -26,6 +48,9 @@ public class DocumentMetadata
 
     [JsonProperty("url")]
     public string? Url { get; set; }
+
+    [JsonProperty("status")]
+    public DocumentStatus? Status { get; set; }
 }
 
 public class DocumentSearchResult
