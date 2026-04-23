@@ -85,8 +85,8 @@ public class AireScopes : List<string>
     public const string PasswordChange = "password-change";
     public const string TrialAccountUpgrade = "trial-account-upgrade";
 
-    public const string ExperimentalCustomPrompt = "experimental-custom-prompt";
-    public static readonly AireScopes Experimental = [ExperimentalCustomPrompt];
+    public const string FeatureTokenCount = "feat-token-count";
+    public const string FeatureCustomPrompt = "feat-custom-prompt";
 
     public static readonly AireScopes AdminScopes = new(
         Profile,
@@ -110,7 +110,8 @@ public class AireScopes : List<string>
         AdminModuleSettings,
         AdminInvites,
         AdminAudit,
-        ExperimentalCustomPrompt
+        FeatureTokenCount,
+        FeatureCustomPrompt
     );
 
     public static readonly AireScopes UserScopes = new(
@@ -130,6 +131,8 @@ public class AireScopes : List<string>
     public static readonly AireScopes DemoAdminScopes = new(
         UserScopes,
         DemoGroups,
+        FeatureTokenCount,
+        FeatureCustomPrompt,
         AireHub
     );
 
@@ -166,7 +169,8 @@ public class AireScopes : List<string>
         AdminAgents,
         AdminInstanceSettings,
         AdminAudit,
-        ExperimentalCustomPrompt
+        FeatureTokenCount,
+        FeatureCustomPrompt
     );
 
     public static readonly AireScopes TrialUserScopes = new(
