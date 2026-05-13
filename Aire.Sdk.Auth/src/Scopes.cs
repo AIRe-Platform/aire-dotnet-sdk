@@ -82,6 +82,7 @@ public class AireScopes : List<string>
 
     public const string Auth = "auth";
     public const string AireHub = "aire-hub";
+    public const string ListPlatforms = "list-platforms";
     public const string PasswordChange = "password-change";
     public const string TrialAccountUpgrade = "trial-account-upgrade";
 
@@ -99,6 +100,7 @@ public class AireScopes : List<string>
         DemoGroups,
         Services,
         AireHub,
+        ListPlatforms,
         PasswordChange,
         Keywords,
         Statistics,
@@ -133,7 +135,8 @@ public class AireScopes : List<string>
         DemoGroups,
         FeatureTokenCount,
         FeatureCustomPrompt,
-        AireHub
+        AireHub,
+        ListPlatforms
     );
 
     public static readonly AireScopes DemoUserScopes = new(
@@ -161,6 +164,7 @@ public class AireScopes : List<string>
         DemoGroups,
         ReadServices,
         AireHub,
+        ListPlatforms,
         PasswordChange,
         Keywords,
         Statistics,

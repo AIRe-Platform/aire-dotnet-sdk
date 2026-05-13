@@ -18,3 +18,10 @@ public class Platform
     [OpenApiProperty(Description = "Dictionary of the service's core modules")]
     public Dictionary<ModuleType, List<Module>>? Modules { get; set; }
 }
+
+public class PlatformInfo
+{
+    [JsonProperty("name", Required = Required.Always)]
+    [OpenApiProperty(Description = "Name of the platform")]
+    public string? Name { get; set; }
+}
