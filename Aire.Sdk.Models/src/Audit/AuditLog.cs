@@ -19,5 +19,5 @@ public class AuditLog
     public List<string>? Sources { get; set; }
 
     [JsonProperty("events")]
-    public List<AuditEvent>? Events { get; set; }
+    public List<Dictionary<string, dynamic?>>? Events { get; set; }
 }

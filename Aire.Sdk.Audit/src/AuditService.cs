@@ -29,7 +29,7 @@ public class AireAuditService(
             Start = from ?? events.FirstOrDefault()?.Timestamp?.ToUniversalTime(),
             End = to ?? events.LastOrDefault()?.Timestamp?.ToUniversalTime(),
             Sources = [source],
-            Events = events
+            Events = [.. events.Select(x => x.ToDictionary())]
         };
 
         return log;
@@ -37,14 +37,14 @@ public class AireAuditService(
 
     public async Task<bool> LogEvent(AireAuditResource resource, string userId, string operation, Dictionary<string, dynamic?>? data)
     {
-        var eventData = new AuditEventData(data ?? [])
+        var eventData = new AuditEvent(data ?? [])
         {
             Source = source,
             UserId = userId,
             Operation = operation
         };
 
-        var entity = new TableEntity(eventData)
+        var entity = new TableEntity(eventData.ToDictionary())
         {
             PartitionKey = resource.ToString(),
             RowKey = Guid.NewGuid().ToString()
@@ -75,20 +75,22 @@ public class AireAuditService(
     private static AuditEvent EntityToModel(TableEntity entity)
     {
         string[] skip = ["RowKey", "PartitionKey", "odata.etag", "ETag", "Timestamp"];
-        var model = new AuditEvent()
-        {
-            Resource = entity.PartitionKey,
-            EventId = Guid.Parse(entity.RowKey),
-            Timestamp = entity.Timestamp?.UtcDateTime,
-        };
 
+        var data = new Dictionary<string, dynamic?>();
         foreach (var key in entity.Keys)
         {
             if (skip.Contains(key))
                 continue;
 
-            model[key] = entity[key];
+            data[key] = entity[key];
         }
+
+        var model = new AuditEvent(data)
+        {
+            Resource = entity.PartitionKey,
+            EventId = Guid.Parse(entity.RowKey),
+            Timestamp = entity.Timestamp?.UtcDateTime,
+        };
 
         return model;
     }
