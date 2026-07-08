@@ -24,10 +24,13 @@ public class Questionnaire
     [JsonProperty("keywords", Required = Required.Always)]
     public string[]? Keywords { get; set; }
 
-    [JsonProperty("content", Required = Required.Always)]
+    [JsonProperty("content")]
     public List<QuestionnaireContent>? Content { get; set; }
-    
-    [JsonProperty("is_feedback")]    
+
+    [JsonProperty("external_url")]
+    public string? ExternalUrl { get; set; }
+
+    [JsonProperty("is_feedback")]
     public bool IsFeedback { get; set; }
 
     public Questionnaire() { }
