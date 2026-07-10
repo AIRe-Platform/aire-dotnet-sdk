@@ -5,6 +5,7 @@
 
 using System.Net.Http.Headers;
 using Aire.Sdk.AspNetCore;
+using Aire.Sdk.Helpers;
 using Aire.Sdk.Models.Platform;
 using Aire.Sdk.Models.Resources;
 using Aire.Sdk.Platform.Clients.Models;
@@ -27,7 +28,7 @@ public class AireAiClient(
     {
         var query = new Dictionary<string, string?> {
             { "query", string.Join(",", keywords ) },
-            { "relevance", relevance.ToString("0.00") }
+            { "relevance", relevance.ObjectToJson() }
         };
         string path = $"embeddings/{database}/questionnaire" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
@@ -68,7 +69,7 @@ public class AireAiClient(
     {
         var query = new Dictionary<string, string?> {
             { "query", search },
-            { "relevance", relevance.ToString("0.00") }
+            { "relevance", relevance.ObjectToJson() }
         };
         string path = $"embeddings/{database}/content" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
