@@ -192,6 +192,7 @@ public class AireScopes : List<string>
     );
 
     public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
+        { AireRoles.NonMember, []},
         { AireRoles.User, UserScopes },
         { AireRoles.Admin, AdminScopes },
         { AireRoles.DemoAdmin, DemoAdminScopes },
