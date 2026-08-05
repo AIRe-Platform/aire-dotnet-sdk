@@ -24,12 +24,16 @@ public class AireAiClient(
     ILogger<AireAiClient> log
     ) : AireClientBase(httpclient, serviceModule, accessToken, serviceKey), IAireAiClient
 {
-    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords, float relevance)
+    public async Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords, string? lang, float relevance)
     {
         var query = new Dictionary<string, string?> {
             { "query", string.Join(",", keywords ) },
             { "relevance", relevance.ObjectToJson() }
         };
+
+        if (!string.IsNullOrEmpty(lang))
+            query.Add("lang", lang);
+
         string path = $"embeddings/{database}/questionnaire" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
         var response = await _httpClient.SendAsync(req);
@@ -65,12 +69,16 @@ public class AireAiClient(
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<ContentQueryResponse?> SearchContent(string database, string search, float relevance)
+    public async Task<ContentQueryResponse?> SearchContent(string database, string search, string? lang, float relevance)
     {
         var query = new Dictionary<string, string?> {
             { "query", search },
             { "relevance", relevance.ObjectToJson() }
         };
+
+        if (!string.IsNullOrEmpty(lang))
+            query.Add("lang", lang);
+
         string path = $"embeddings/{database}/content" + QueryString.FromDictionary(query);
         var req = new HttpRequestMessage(HttpMethod.Get, path);
         var response = await _httpClient.SendAsync(req);

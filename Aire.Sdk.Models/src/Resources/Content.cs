@@ -48,6 +48,9 @@ public class Content
     [JsonProperty("description")]
     public string? Description { get; set; }
 
+    [JsonProperty("lang")]
+    public string? Language { get; set; }
+
     [JsonProperty("hidden")]
     public bool? Hidden { get; set; }
 
@@ -101,6 +104,9 @@ public class ContentMetadata
 
     [JsonProperty("type")]
     public ContentType? Type { get; set; }
+
+    [JsonProperty("lang")]
+    public string? Language { get; set; }
 
     [JsonProperty("keywords")]
     public string[]? Keywords { get; set; }
