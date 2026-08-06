@@ -17,7 +17,7 @@ public interface IAireAiClient
     /// <param name="database">Database name</param>
     /// <param name="keywords"></param>
     /// <returns>List of questionnaire IDs sorted by relevance</returns>
-    public abstract Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords, float relevance);
+    public abstract Task<QuestionnaireQueryResponse?> QueryQuestionnaires(string database, IEnumerable<string> keywords, string? lang, float relevance);
 
     /// <summary>
     /// Embeds questionnaire for RAG and similarity search
@@ -41,7 +41,7 @@ public interface IAireAiClient
     /// <param name="database">Database name</param>
     /// <param name="search">Search string</param>
     /// <returns>List of questionnaire IDs sorted by relevance</returns>
-    public abstract Task<ContentQueryResponse?> SearchContent(string database, string search, float relevance);
+    public abstract Task<ContentQueryResponse?> SearchContent(string database, string search, string? lang, float relevance);
 
     /// <summary>
     /// Embeds content for RAG and similarity search
