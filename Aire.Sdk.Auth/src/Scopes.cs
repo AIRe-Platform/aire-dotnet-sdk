@@ -127,7 +127,8 @@ public class AireScopes : List<string>
         ReadDocument,
         ReadKeywords,
         PasswordChange,
-        WriteStatistics
+        WriteStatistics,
+        ListPlatforms
     );
 
     public static readonly AireScopes DemoAdminScopes = new(
@@ -150,7 +151,8 @@ public class AireScopes : List<string>
         RateContent,
         ReadDocument,
         ReadKeywords,
-        WriteStatistics
+        WriteStatistics,
+        ListPlatforms
     );
 
     public static readonly AireScopes KeyUserScopes = new(
@@ -192,7 +194,7 @@ public class AireScopes : List<string>
     );
 
     public static readonly Dictionary<string, AireScopes> DefaultRoleScopes = new() {
-        { AireRoles.NonMember, []},
+        { AireRoles.NonMember, [ListPlatforms]},
         { AireRoles.User, UserScopes },
         { AireRoles.Admin, AdminScopes },
         { AireRoles.DemoAdmin, DemoAdminScopes },
