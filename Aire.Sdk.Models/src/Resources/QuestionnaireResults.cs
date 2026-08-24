@@ -15,6 +15,12 @@ public class QuestionnaireResults
     [JsonProperty("questionnaire_id", Required = Required.Always)]
     public string? QuestionnaireId { get; set; }
 
+    [JsonProperty("user_id")]
+    public string? UserId { get; set; }
+
+    [JsonProperty("privacy")]
+    public QuestionnairePrivacy Privacy { get; set; }
+
     [JsonProperty("timestamp")]
     public DateTime? Timestamp { get; set; }
 
@@ -25,5 +31,5 @@ public class QuestionnaireResults
     public string? Summary { get; set; }
 
     [JsonProperty("prompts")]
-    public List<string>? Prompts { get; set;}
+    public List<string>? Prompts { get; set; }
 }

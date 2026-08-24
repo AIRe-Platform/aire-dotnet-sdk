@@ -3,9 +3,27 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Aire.Sdk.Models.Resources;
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum QuestionnairePrivacy
+{
+    // The results are encrypted and accessible only by the user
+    [EnumMember(Value = "private")]
+    Private,
+
+    // The results are unencrypted but not tied to the user
+    [EnumMember(Value = "anonymous")]
+    Anonymous,
+
+    // The results are unencrypted and tied to the user
+    [EnumMember(Value = "public")]
+    Public
+}
 
 public class Questionnaire
 {
@@ -32,6 +50,9 @@ public class Questionnaire
 
     [JsonProperty("is_feedback")]
     public bool IsFeedback { get; set; }
+
+    [JsonProperty("privacy")]
+    public QuestionnairePrivacy? Privacy { get; set; }
 
     public Questionnaire() { }
 }

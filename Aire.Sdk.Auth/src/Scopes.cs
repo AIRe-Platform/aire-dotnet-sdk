@@ -23,6 +23,10 @@ public class AireScopes : List<string>
     public const string DeleteQuestionnaire = "questionnaire-delete";
     public static readonly AireScopes Questionnaire = [ReadQuestionnaire, WriteQuestionnaire, DeleteQuestionnaire];
 
+    public const string ReadPublicQuestionnaireResults = "pub-q-results-read";
+    public const string DeletePublicQuestionnaireResults = "pub-q-results-delete";
+    public static readonly AireScopes PublicQuestionnaireResults = [ReadPublicQuestionnaireResults, DeletePublicQuestionnaireResults];
+
     public const string ReadContent = "content-read";
     public const string WriteContent = "content-write";
     public const string DeleteContent = "content-delete";
@@ -94,6 +98,7 @@ public class AireScopes : List<string>
         ChatHistory,
         ChatBot,
         Questionnaire,
+        PublicQuestionnaireResults,
         Content,
         Reminders,
         Document,
@@ -158,6 +163,7 @@ public class AireScopes : List<string>
         ChatHistory,
         ChatBot,
         Questionnaire,
+        PublicQuestionnaireResults,
         Content,
         Reminders,
         Document,
