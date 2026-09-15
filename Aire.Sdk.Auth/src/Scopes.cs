@@ -187,7 +187,6 @@ public class AireScopes : List<string>
         PasswordChange,
         Keywords,
         Statistics,
-        Accounts,
         ReadClients,
         AdminAgents,
         AdminInstanceSettings,
