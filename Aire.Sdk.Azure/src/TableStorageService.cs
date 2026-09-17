@@ -95,6 +95,17 @@ public class TableStorageService : ITableStorageService
         return !response.IsError;
     }
 
+    public async Task<bool> UpdateAsync<T>(T entity) where T : class, ITableEntity, new()
+    {
+        var client = await GetTableClientForType(typeof(T));
+        var response = await client.UpdateEntityAsync(entity, entity.ETag, TableUpdateMode.Merge);
+
+        if (response.IsError)
+            log.LogError("Failed to upsert entity: {status} {reason}", response.Status, response.ReasonPhrase);
+
+        return !response.IsError;
+    }
+
     public async Task<bool> DeleteAsync<T>(T entity) where T : class, ITableEntity, new()
     {
         return await DeleteAsync<T>(entity.PartitionKey, entity.RowKey);

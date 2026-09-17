@@ -58,6 +58,15 @@ public interface ITableStorageService
         where T : class, ITableEntity, new();
 
     /// <summary>
+    /// Updates an entity with ETag check.
+    /// </summary>
+    /// <typeparam name="T">Entity class</typeparam>
+    /// <param name="entity">Entity object</param>
+    /// <returns>True if successful, otherwise false</returns>
+    Task<bool> UpdateAsync<T>(T entity)
+        where T : class, ITableEntity, new();
+
+    /// <summary>
     /// Deletes an entity
     /// </summary>
     /// <typeparam name="T">Entity class</typeparam>
