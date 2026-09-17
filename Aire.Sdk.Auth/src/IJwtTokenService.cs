@@ -11,6 +11,6 @@ public interface IJwtTokenService
 {
     JwtSecurityToken? ValidateToken(string token);
     bool CheckAuthorization(JwtAuthFeature? auth, string? requiredScopes = null);
-    bool CheckAuthorization(JwtAuthFeature? auth, AireScopes? requiredScopes = null);
+    bool CheckAuthorization(JwtAuthFeature? auth, IReadOnlyList<string>? requiredScopes = null);
     string IssueNewToken(string subject, string role, List<string> scopes, Dictionary<string, object> claims, TimeSpan lifetime);
 }

@@ -38,7 +38,7 @@ public class JwtTokenService : IJwtTokenService
         return CheckAuthorization(auth, scopes);
     }
 
-    public bool CheckAuthorization(JwtAuthFeature? auth, AireScopes? requiredScopes)
+    public bool CheckAuthorization(JwtAuthFeature? auth, IReadOnlyList<string>? requiredScopes)
     {
         if (auth == null) return false;
 
