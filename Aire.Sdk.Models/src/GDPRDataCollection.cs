@@ -6,6 +6,7 @@
 using Aire.Sdk.Models.Chat;
 using Aire.Sdk.Models.Identity;
 using Aire.Sdk.Models.Resources;
+using Aire.Sdk.Models.Statistics;
 using Newtonsoft.Json;
 
 namespace Aire.Sdk.Models;
@@ -23,6 +24,18 @@ public class GDPRMemoryDataCollection
 
     [JsonProperty("questionnaires")]
     public List<QuestionnaireResults>? Questionnaires { get; set; }
+
+    [JsonProperty("public_questionnaires")]
+    public List<QuestionnaireResults>? PublicQuestionnaires { get; set; }
+
+    [JsonProperty("reminders")]
+    public List<Reminder>? Reminders { get; set; }
+
+    [JsonProperty("content_votes")]
+    public List<ContentVote>? ContentVotes { get; set; }
+
+    [JsonProperty("stats")]
+    public List<StatisticsEvent>? Statistics { get; set; }
 }
 
 /// <summary>

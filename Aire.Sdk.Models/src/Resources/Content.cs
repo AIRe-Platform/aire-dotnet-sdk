@@ -74,7 +74,7 @@ public class Content
 
     [JsonProperty("thumbs_up")]
     public int ThumbsUp { get; set; }
-   
+
     [JsonProperty("thumbs_down")]
     public int ThumbsDown { get; set; }
 
@@ -83,7 +83,7 @@ public class Content
 
     [JsonProperty("keywords")]
     public string[]? Keywords { get; set; }
-    
+
     [JsonProperty("file_name")]
     public string? FileName { get; set; }
 
@@ -113,4 +113,16 @@ public class ContentMetadata
 
     [JsonProperty("relevance")]
     public float? Relevance { get; set; }
+}
+
+/// <summary>
+/// Content vote
+/// </summary>
+public class ContentVote
+{
+    [JsonProperty("content_id")]
+    public string? ContentId { get; set; }
+
+    [JsonProperty("score")]
+    public int Score { get; set; }
 }
