@@ -15,11 +15,14 @@ public class QuestionAnswer
     [JsonProperty("question_id", Required = Required.Always)]
     public string? QuestionId { get; set; }
 
+    [JsonProperty("privacy", Required = Required.AllowNull)]
+    public QuestionnairePrivacy? Privacy { get; set; }
+
     [JsonProperty("type", Required = Required.Always)]
     public QuestionOptionType? Type { get; set; }
 
     [JsonProperty("question", Required = Required.Always)]
-    public string? Question { get; set; }
+    public string? Question { get; set; }
 
     [JsonProperty("prompt")]
     public string? Prompt { get; set; }
